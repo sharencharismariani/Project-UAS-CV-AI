@@ -69,9 +69,16 @@
       <!-- Judul Entri CV -->
       <div class="form-group" style="flex: 2;">
         <label for="judul" class="form-label">Judul Entri CV <span class="required">*</span></label>
-        <input type="text" id="judul" name="judul" class="form-control" value="{{ entri.judul if entri else pencapaian.nama_kegiatan }}" required placeholder="Contoh: Ketua Pelaksana - Seminar Nasional IT">
-        <div class="form-hint">Format rekomendasi: Peran - Nama Kegiatan (atau nama saja untuk sertifikasi).</div>
+        <input type="text" id="judul" name="judul" class="form-control" value="{{ entri.judul if entri else pencapaian.nama_kegiatan }}" required placeholder="Contoh: Juara 3 - Lomba UI/UX Design">
+        <div class="form-hint">Format rekomendasi: Juara / Peran - Nama Kegiatan.</div>
       </div>
+    </div>
+
+    <!-- Juara / Peran Tambahan -->
+    <div class="form-group">
+      <label for="peran" class="form-label">Juara / Predikat / Peran</label>
+      <input type="text" id="peran" name="peran" class="form-control" value="{{ pencapaian.peran or '' }}" placeholder="Contoh: Juara 3, Juara 3 (Project Leader), Finalis">
+      <div class="form-hint">Keterangan juara atau peran Anda. Ditampilkan mendatar ke kanan pada baris informasi CV.</div>
     </div>
 
     <!-- Poin-Poin Pencapaian (Dynamic Editor) -->

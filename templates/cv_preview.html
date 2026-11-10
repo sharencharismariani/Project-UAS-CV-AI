@@ -65,6 +65,9 @@
             <div class="cv-item-title">{{ entri.judul }}</div>
             
             {% set meta_list = [] %}
+            {% if entri.peran and entri.peran.strip() %}
+              {% set _ = meta_list.append(entri.peran.strip()) %}
+            {% endif %}
             {% if entri.penyelenggara %}{% set _ = meta_list.append(entri.penyelenggara) %}{% endif %}
             {% if entri.lokasi %}{% set _ = meta_list.append(entri.lokasi) %}{% endif %}
             {% if entri.periode %}{% set _ = meta_list.append(entri.periode) %}{% endif %}

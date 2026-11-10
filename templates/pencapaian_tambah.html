@@ -21,15 +21,21 @@
 
     <div class="form-row">
       <div class="form-group">
-        <label for="peran" class="form-label">Peran / Jabatan</label>
-        <input type="text" id="peran" name="peran" class="form-control" placeholder="Contoh: Ketua Pelaksana, Fullstack Intern, atau Juara 1" value="{{ form_data.peran if form_data else '' }}">
-        <div class="form-hint">Kosongkan jika sertifikasi atau kegiatan tanpa peran khusus.</div>
+        <label for="juara" class="form-label">Juara / Predikat Penghargaan</label>
+        <input type="text" id="juara" name="juara" class="form-control" placeholder="Contoh: Juara 1, Juara 3, Finalis, Medali Emas" value="{{ form_data.juara if form_data else '' }}">
+        <div class="form-hint">Isi jika perlombaan / penghargaan (misal: Juara 1, Juara 3).</div>
       </div>
 
       <div class="form-group">
-        <label for="penyelenggara" class="form-label">Penyelenggara / Institusi / Perusahaan</label>
-        <input type="text" id="penyelenggara" name="penyelenggara" class="form-control" placeholder="Contoh: HIMA SI, Dicoding, PT Maju Bersama" value="{{ form_data.penyelenggara if form_data else '' }}">
+        <label for="peran" class="form-label">Peran / Jabatan / Posisi</label>
+        <input type="text" id="peran" name="peran" class="form-control" placeholder="Contoh: Project Leader, Ketua Tim, Anggota, Intern" value="{{ form_data.peran if form_data else '' }}">
+        <div class="form-hint">Peran atau posisi Anda dalam kegiatan ini.</div>
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="penyelenggara" class="form-label">Penyelenggara / Institusi / Perusahaan</label>
+      <input type="text" id="penyelenggara" name="penyelenggara" class="form-control" placeholder="Contoh: HIMA SI, Dicoding, PT Maju Bersama, Universitas Brawijaya" value="{{ form_data.penyelenggara if form_data else '' }}">
     </div>
 
     <div class="form-row">

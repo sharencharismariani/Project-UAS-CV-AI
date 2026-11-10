@@ -188,8 +188,10 @@ def buat_file_docx(profil: dict, cv_data: dict, filepath: str):
             r_judul.bold = True
             r_judul.font.size = Pt(11)
 
-            # Metadata entri: Penyelenggara | Lokasi | Periode
+            # Metadata entri: Juara/Peran | Penyelenggara | Lokasi | Periode (mendatar)
             meta_parts = []
+            if item.get("peran") and item["peran"].strip():
+                meta_parts.append(item["peran"].strip())
             if item.get("penyelenggara"):
                 meta_parts.append(item["penyelenggara"].strip())
             if item.get("lokasi"):
@@ -392,14 +394,24 @@ def tambah_pencapaian_page():
     if request.method == "POST":
         nama_kegiatan = request.form.get("nama_kegiatan", "").strip()
         penyelenggara = request.form.get("penyelenggara", "").strip()
-        peran = request.form.get("peran", "").strip()
+        juara_input = request.form.get("juara", "").strip()
+        peran_input = request.form.get("peran", "").strip()
         periode = request.form.get("periode", "").strip()
         lokasi = request.form.get("lokasi", "").strip()
         uraian = request.form.get("uraian", "").strip()
 
+        # Gabungkan juara dan peran jika diisi (misal: "Juara 3 (Project Leader)")
+        if juara_input and peran_input:
+            peran = f"{juara_input} ({peran_input})"
+        elif juara_input:
+            peran = juara_input
+        else:
+            peran = peran_input
+
         form_data = {
             "nama_kegiatan": nama_kegiatan,
             "penyelenggara": penyelenggara,
+            "juara": juara_input,
             "peran": peran,
             "periode": periode,
             "lokasi": lokasi,
@@ -508,6 +520,15 @@ def sunting_pencapaian_page(id):
 
         # Simpan kembali hasil sunting
         db.simpan_hasil_ai(id, bagian, judul, daftar_poin)
+
+        # Perbarui juara / peran pada pencapaian jika diedit
+        peran_baru = request.form.get("peran", "").strip()
+        con = db.koneksi()
+        try:
+            con.execute("UPDATE pencapaian SET peran = ? WHERE id = ?", (peran_baru, id))
+            con.commit()
+        finally:
+            con.close()
 
         # Ubah status sesuai konfigurasi AUTO_APPROVE
         if AUTO_APPROVE:
