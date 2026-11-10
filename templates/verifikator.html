@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Verifikasi Pencapaian Mahasiswa - CVku{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div>
+      <span class="badge badge-section" style="margin-bottom: 0.35rem;">Panel Verifikator</span>
+      <h1 class="card-title">Antrean Verifikasi Pencapaian</h1>
+      <p class="card-subtitle">
+        Tinjau keabsahan kegiatan mahasiswa dan hasil olahan AI sebelum disahkan masuk ke dokumen resmi CV mahasiswa.
+      </p>
+    </div>
+  </div>
+
+  {% if antrean %}
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      {% for item in antrean %}
+        <div class="card" style="border-left: 4px solid #d97706; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+            <div>
+              <div style="font-size: 0.825rem; color: var(--muted); margin-bottom: 0.2rem;">
+                Mahasiswa: <strong style="color: var(--dark);">{{ item.nama_mahasiswa or item.username }}</strong> ({{ item.username }})
+              </div>
+              <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">
+                {{ item.nama_kegiatan }}
+              </h2>
+            </div>
+            <div>
+              <span class="badge badge-menunggu">⏳ Menunggu Verifikasi</span>
+            </div>
+          </div>
+
+          <!-- Rincian Faktual & Uraian -->
+          <div class="detail-box" style="margin-bottom: 1rem;">
+            <div class="detail-row">
+              <div class="detail-label">Kategori / Bagian:</div>
+              <div class="detail-value"><span class="badge badge-section">{{ item.bagian or 'Lainnya' }}</span></div>
+            </div>
+            {% if item.peran %}
+            <div class="detail-row">
+              <div class="detail-label">Peran Mahasiswa:</div>
+              <div class="detail-value"><strong>{{ item.peran }}</strong></div>
+            </div>
+            {% endif %}
+            {% if item.penyelenggara %}
+            <div class="detail-row">
+              <div class="detail-label">Penyelenggara:</div>
+              <div class="detail-value">{{ item.penyelenggara }}</div>
+            </div>
+            {% endif %}
+            {% if item.periode %}
+            <div class="detail-row">
+              <div class="detail-label">Periode &amp; Lokasi:</div>
+              <div class="detail-value">{{ item.periode }}{% if item.lokasi %} | {{ item.lokasi }}{% endif %}</div>
+            </div>
+            {% endif %}
+            <div class="detail-row">
+              <div class="detail-label">Uraian Asli:</div>
+              <div class="detail-value" style="font-style: italic; color: var(--slate);">"{{ item.uraian }}"</div>
+            </div>
+          </div>
+
+          <!-- Hasil AI yang Direview -->
+          {% if item.entri and item.entri.poin %}
+            <div style="margin-bottom: 1.25rem; padding: 1rem; background-color: #f8fafc; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.35rem;">
+                Rumusan Judul &amp; Poin CV (Hasil AI):
+              </div>
+              <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.35rem; color: var(--dark);">
+                {{ item.entri.judul }}
+              </div>
+              <ul style="margin-left: 1.25rem; font-size: 0.9rem; color: var(--slate);">
+                {% for p in item.entri.poin %}
+                  <li>{{ p }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <!-- Form Tindakan Verifikasi -->
+          <form method="POST" action="{{ url_for('verifikasi_action', id=item.id) }}">
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label for="catatan_{{ item.id }}" class="form-label">Catatan Verifikator (Opsional)</label>
+              <input type="text" id="catatan_{{ item.id }}" name="catatan" class="form-control" placeholder="Contoh: Bukti sertifikat/kegiatan terkonfirmasi valid.">
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap;">
+              <button type="submit" name="status" value="ditolak" class="btn btn-danger-outline" onclick="return confirm('Apakah Anda yakin ingin MENOLAK pencapaian ini?');">
+                ✗ Tolak Pencapaian
+              </button>
+              <button type="submit" name="status" value="disetujui" class="btn btn-secondary">
+                ✓ Setujui Masuk ke CV
+              </button>
+            </div>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div style="text-align: center; padding: 3rem 1rem;">
+      <div style="font-size: 3rem; margin-bottom: 0.75rem;">🎉</div>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Tidak Ada Antrean Verifikasi</h3>
+      <p style="color: var(--muted); max-width: 480px; margin: 0 auto;">
+        Semua pencapaian yang diajukan mahasiswa telah selesai diverifikasi atau belum ada pencapaian baru yang menunggu.
+      </p>
+    </div>
+  {% endif %}
+
+  <!-- Riwayat Verifikasi Terakhir -->
+  {% if riwayat_terverifikasi %}
+    <div style="margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--dark);">
+        Riwayat Terakhir yang Diverifikasi
+      </h3>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Mahasiswa</th>
+              <th>Nama Kegiatan</th>
+              <th>Status</th>
+              <th>Catatan</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in riwayat_terverifikasi %}
+              <tr>
+                <td><strong>{{ r.nama_mahasiswa or r.username }}</strong></td>
+                <td>{{ r.nama_kegiatan }}</td>
+                <td>
+                  <span class="badge badge-{{ r.status }}">
+                    {% if r.status == 'disetujui' %}✓ Disetujui{% else %}✗ Ditolak{% endif %}
+                  </span>
+                </td>
+                <td>{{ r.catatan or '-' }}</td>
+                <td><small style="color: var(--muted);">{{ r.tanggal }}</small></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Profil Saya - CVku{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 760px; margin: 0 auto;">
+  <div class="card-header">
+    <div>
+      <h1 class="card-title">Profil & Data Pribadi</h1>
+      <p class="card-subtitle">Informasi ini akan dicantumkan di bagian kepala (header) dokumen CV Anda</p>
+    </div>
+  </div>
+
+  <form method="POST" action="{{ url_for('profil') }}">
+    <div class="form-group">
+      <label for="nama" class="form-label">Nama Lengkap <span class="required">*</span></label>
+      <input type="text" id="nama" name="nama" class="form-control" placeholder="Contoh: Sharen Charismariani" required value="{{ pengguna.nama or '' }}">
+      <div class="form-hint">Nama resmi yang akan menjadi judul utama CV Anda.</div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email" class="form-label">Alamat Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="nama@email.com" value="{{ pengguna.email or '' }}">
+      </div>
+
+      <div class="form-group">
+        <label for="telepon" class="form-label">Nomor Telepon / WhatsApp</label>
+        <input type="text" id="telepon" name="telepon" class="form-control" placeholder="081234567890" value="{{ pengguna.telepon or '' }}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="kota" class="form-label">Kota Domisili</label>
+        <input type="text" id="kota" name="kota" class="form-control" placeholder="Contoh: Malang / Jakarta" value="{{ pengguna.kota or '' }}">
+      </div>
+
+      <div class="form-group">
+        <label for="linkedin" class="form-label">Tautan LinkedIn</label>
+        <input type="text" id="linkedin" name="linkedin" class="form-control" placeholder="linkedin.com/in/username" value="{{ pengguna.linkedin or '' }}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ringkasan" class="form-label">Ringkasan Profil (Executive Summary)</label>
+      <textarea id="ringkasan" name="ringkasan" class="form-control" rows="4" placeholder="Tuliskan 2-3 kalimat mengenai latar belakang pendidikan, minat karier, dan keunggulan utama Anda...">{{ pengguna.ringkasan or '' }}</textarea>
+      <div class="form-hint">Opsional. Bagian ini akan muncul di bawah kontak bila diisi.</div>
+    </div>
+
+    <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+      <a href="{{ url_for('beranda') }}" class="btn btn-outline">Batal</a>
+      <button type="submit" class="btn btn-primary">Simpan Perubahan Profil</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

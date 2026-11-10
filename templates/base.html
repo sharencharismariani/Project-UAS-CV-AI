@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CVku - Generator CV Mahasiswa ATS-Friendly{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navigasi Utama -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{{ url_for('beranda') }}" class="brand">
+        <span class="brand-badge">CV</span>
+        <span>CVku</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li class="nav-item {% if request.endpoint == 'beranda' %}active{% endif %}">
+          <a href="{{ url_for('beranda') }}">Beranda</a>
+        </li>
+
+        {% if session.get('user_id') %}
+          {% if session.get('peran') == 'mahasiswa' %}
+            <li class="nav-item {% if request.endpoint == 'profil' %}active{% endif %}">
+              <a href="{{ url_for('profil') }}">Profil Saya</a>
+            </li>
+            <li class="nav-item {% if request.endpoint == 'daftar_pencapaian_page' %}active{% endif %}">
+              <a href="{{ url_for('daftar_pencapaian_page') }}">Pencapaian</a>
+            </li>
+            <li class="nav-item {% if request.endpoint == 'tambah_pencapaian_page' %}active{% endif %}">
+              <a href="{{ url_for('tambah_pencapaian_page') }}">+ Tambah Kegiatan</a>
+            </li>
+            <li class="nav-item {% if request.endpoint == 'cv_preview_page' %}active{% endif %}">
+              <a href="{{ url_for('cv_preview_page') }}">CV Saya</a>
+            </li>
+            <li class="nav-item {% if request.endpoint == 'cv_riwayat_page' %}active{% endif %}">
+              <a href="{{ url_for('cv_riwayat_page') }}">Riwayat CV</a>
+            </li>
+          {% elif session.get('peran') == 'verifikator' %}
+            <li class="nav-item {% if request.endpoint == 'verifikator_page' %}active{% endif %}">
+              <a href="{{ url_for('verifikator_page') }}">Verifikasi Pencapaian</a>
+            </li>
+          {% endif %}
+        {% else %}
+          <li class="nav-item {% if request.endpoint == 'login' %}active{% endif %}">
+            <a href="{{ url_for('login') }}">Masuk</a>
+          </li>
+          <li class="nav-item {% if request.endpoint == 'register' %}active{% endif %}">
+            <a href="{{ url_for('register') }}">Daftar</a>
+          </li>
+        {% endif %}
+      </ul>
+
+      {% if session.get('user_id') %}
+        <div class="nav-user">
+          <span class="user-badge">
+            👤 {{ session.get('nama') or session.get('username') }}
+            <span class="user-role-tag {{ session.get('peran') }}">{{ session.get('peran') }}</span>
+          </span>
+          <a href="{{ url_for('logout') }}" class="btn btn-outline btn-sm">Keluar</a>
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- Konten Utama -->
+  <main class="main-content">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category if category != 'error' else 'danger' }}">
+              <span>
+                {% if category == 'success' %}✓{% elif category in ['error', 'danger'] %}⚠{% elif category == 'warning' %}⏳{% else %}ℹ{% endif %}
+                {{ message }}
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 CVku — Aplikasi Penyusun CV ATS-Friendly untuk Mahasiswa. Bagian Integrasi Sistem Informasi & AI.</p>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

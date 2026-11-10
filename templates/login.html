@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Masuk - CVku{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Masuk ke CVku</h1>
+      <p class="auth-subtitle">Silakan masukkan username dan password akun Anda</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label for="username" class="form-label">Username <span class="required">*</span></label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Contoh: demo" required autofocus value="{{ username or '' }}">
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password <span class="required">*</span></label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+        Masuk
+      </button>
+    </form>
+
+    <!-- Tombol Isi Cepat Demo -->
+    <div class="demo-account-box">
+      <strong>Klik Cepat Akun Uji Coba:</strong>
+      <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="isiAkun('demo', 'demo123')" style="flex: 1;">
+          Mahasiswa (demo)
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="isiAkun('dosen', 'dosen123')" style="flex: 1;">
+          Verifikator (dosen)
+        </button>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--muted);">
+      Belum memiliki akun? <a href="{{ url_for('register') }}" style="font-weight: 600;">Daftar di sini</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function isiAkun(u, p) {
+    document.getElementById('username').value = u;
+    document.getElementById('password').value = p;
+  }
+</script>
+{% endblock %}

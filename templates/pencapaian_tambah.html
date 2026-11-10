@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Tambah Pencapaian - CVku{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 780px; margin: 0 auto;">
+  <div class="card-header">
+    <div>
+      <h1 class="card-title">+ Tambah Kegiatan & Pencapaian</h1>
+      <p class="card-subtitle">
+        Ceritakan pengalaman Anda. Modul AI akan membantu merumuskan poin-poin pencapaian yang menarik untuk CV Anda.
+      </p>
+    </div>
+  </div>
+
+  <form method="POST" action="{{ url_for('tambah_pencapaian_page') }}" id="formPencapaian" onsubmit="return handleFormSubmit(this)">
+    <div class="form-group">
+      <label for="nama_kegiatan" class="form-label">Nama Kegiatan / Proyek / Pelatihan <span class="required">*</span></label>
+      <input type="text" id="nama_kegiatan" name="nama_kegiatan" class="form-control" placeholder="Contoh: Seminar Nasional AI, Magang Web Developer, atau Hackathon Kampus" required value="{{ form_data.nama_kegiatan if form_data else '' }}">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="peran" class="form-label">Peran / Jabatan</label>
+        <input type="text" id="peran" name="peran" class="form-control" placeholder="Contoh: Ketua Pelaksana, Fullstack Intern, atau Juara 1" value="{{ form_data.peran if form_data else '' }}">
+        <div class="form-hint">Kosongkan jika sertifikasi atau kegiatan tanpa peran khusus.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="penyelenggara" class="form-label">Penyelenggara / Institusi / Perusahaan</label>
+        <input type="text" id="penyelenggara" name="penyelenggara" class="form-control" placeholder="Contoh: HIMA SI, Dicoding, PT Maju Bersama" value="{{ form_data.penyelenggara if form_data else '' }}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="periode" class="form-label">Periode Kegiatan</label>
+        <input type="text" id="periode" name="periode" class="form-control" placeholder="Contoh: Jul 2024 - Sep 2024" value="{{ form_data.periode if form_data else '' }}">
+      </div>
+
+      <div class="form-group">
+        <label for="lokasi" class="form-label">Lokasi</label>
+        <input type="text" id="lokasi" name="lokasi" class="form-control" placeholder="Contoh: Malang, Jakarta, atau Daring" value="{{ form_data.lokasi if form_data else '' }}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="uraian" class="form-label">Uraian Singkat Kegiatan & Tanggung Jawab <span class="required">*</span></label>
+      <textarea id="uraian" name="uraian" class="form-control" rows="5" placeholder="Tuliskan apa saja yang Anda kerjakan, tanggung jawab utama, atau hasil yang dicapai. Contoh: memimpin 30 panitia dalam menyelenggarakan seminar, mengelola anggaran 15 juta, dan mendatangkan 200 peserta." required>{{ form_data.uraian if form_data else '' }}</textarea>
+      <div class="form-hint">
+        💡 <strong>Tips:</strong> Cantumkan angka atau fakta nyata (jumlah panitia, persentase peningkatan, teknologi yang dipakai). Model AI akan mengolahnya menjadi kalimat aktif yang kuat.
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+      <a href="{{ url_for('daftar_pencapaian_page') }}" class="btn btn-outline">Batal</a>
+      <button type="submit" id="btnSubmit" class="btn btn-primary">
+        <span>🤖 Proses dengan AI &amp; Lanjut</span>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function handleFormSubmit(form) {
+    var uraian = document.getElementById('uraian').value.trim();
+    if (!uraian) {
+      alert('Uraian kegiatan wajib diisi.');
+      document.getElementById('uraian').focus();
+      return false;
+    }
+    var btn = document.getElementById('btnSubmit');
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ Memproses dengan AI... Mohon tunggu</span>';
+    return true;
+  }
+</script>
+{% endblock %}

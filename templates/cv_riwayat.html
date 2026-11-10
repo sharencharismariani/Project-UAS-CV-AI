@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Riwayat Versi CV - CVku{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div>
+      <h1 class="card-title">Riwayat Versi Dokumen CV</h1>
+      <p class="card-subtitle">Daftar seluruh dokumen CV format .docx yang pernah Anda unduh dari sistem</p>
+    </div>
+    <div>
+      <a href="{{ url_for('cv_preview_page') }}" class="btn btn-outline">← Kembali ke CV Saya</a>
+      <a href="{{ url_for('unduh_cv_action') }}" class="btn btn-primary">⬇ Buat &amp; Unduh Versi Baru</a>
+    </div>
+  </div>
+
+  {% if versi_list %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">#</th>
+            <th>Nama Berkas</th>
+            <th>Waktu Dibuat</th>
+            <th style="text-align: right; width: 140px;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in versi_list %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>
+                <span style="font-weight: 600; font-family: monospace; color: var(--dark);">📄 {{ v.nama_file }}</span>
+              </td>
+              <td>
+                <span style="color: var(--muted); font-size: 0.875rem;">{{ v.dibuat_pada }}</span>
+              </td>
+              <td style="text-align: right;">
+                <a href="{{ url_for('unduh_ulang_cv_action', id=v.id) }}" class="btn btn-outline btn-sm">
+                  ⬇ Unduh Ulang
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div style="text-align: center; padding: 3rem 1rem;">
+      <div style="font-size: 3rem; margin-bottom: 0.75rem;">📁</div>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Belum Ada Riwayat Unduhan</h3>
+      <p style="color: var(--muted); max-width: 450px; margin: 0 auto 1.5rem;">
+        Anda belum pernah membuat atau mengunduh dokumen CV. Buka halaman CV Saya untuk mengunduh versi pertama.
+      </p>
+      <a href="{{ url_for('cv_preview_page') }}" class="btn btn-primary">Buka Halaman CV Saya</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - CVku{% endblock %}
+
+{% block content %}
+{% if not session.get('user_id') %}
+  <!-- Tampilan untuk Pengunjung (Belum Login) -->
+  <div class="card" style="text-align: center; padding: 3rem 1.5rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);">
+    <span class="badge badge-section" style="margin-bottom: 1rem; font-size: 0.85rem;">ATS-Friendly Resume Builder</span>
+    <h1 style="font-size: 2.3rem; font-weight: 800; color: var(--dark); line-height: 1.25; margin-bottom: 1rem;">
+      Ubah Catatan Kegiatan Menjadi <span style="color: var(--primary);">CV Standar ATS</span>
+    </h1>
+    <p style="font-size: 1.05rem; color: var(--muted); max-width: 680px; margin: 0 auto 2rem;">
+      Mahasiswa cukup menuliskan uraian kegiatan apa adanya. Modul AI membantu mengklasifikasikan bagian, menyusun judul baku, dan menyusun poin CV ringkas berorientasi hasil.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem;">
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Masuk ke Akun</a>
+      <a href="{{ url_for('register') }}" class="btn btn-outline btn-lg">Daftar Akun Baru</a>
+    </div>
+
+    <!-- Informasi Akun Uji Coba Demo -->
+    <div style="max-width: 520px; margin: 0 auto; text-align: left;" class="demo-account-box">
+      <strong>Akun Demo Siap Pakai:</strong>
+      <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.4rem;">
+        <div>
+          <span style="font-weight: 600;">Mahasiswa:</span> <code>demo</code> / <code>demo123</code>
+        </div>
+        <div>
+          <span style="font-weight: 600;">Verifikator:</span> <code>dosen</code> / <code>dosen123</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fitur Utama -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <div class="card">
+      <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🤖</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">Dibantu Kecerdasan Buatan</h3>
+      <p style="color: var(--muted); font-size: 0.9rem;">
+        Uraian kegiatan diubah menjadi kalimat aktif berbobot yang menonjolkan aksi dan hasil faktual tanpa halusinasi.
+      </p>
+    </div>
+
+    <div class="card">
+      <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📄</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">Format DOCX ATS-Friendly</h3>
+      <p style="color: var(--muted); font-size: 0.9rem;">
+        Satu kolom, tanpa tabel, tanpa gambar, dan struktur heading rapi yang dapat terbaca optimal oleh sistem ATS perusahaan.
+      </p>
+    </div>
+
+    <div class="card">
+      <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🛡️</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">Verifikasi & Kontrol Penuh</h3>
+      <p style="color: var(--muted); font-size: 0.9rem;">
+        Pengguna selalu dapat memeriksa dan menyunting hasil AI sebelum disimpan. Mendukung alur verifikasi resmi kampus.
+      </p>
+    </div>
+  </div>
+
+{% elif session.get('peran') == 'mahasiswa' %}
+  <!-- Dashboard Mahasiswa -->
+  <div class="card" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #ffffff; padding: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="badge badge-section" style="background: rgba(37,99,235,0.25); color: #93c5fd; border-color: rgba(147,197,253,0.3); margin-bottom: 0.5rem;">
+          Mode AI Aktif: {{ ai_mode|upper }}
+        </span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: #ffffff;">Halo, {{ profil.nama or session.get('username') }}! 👋</h1>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.25rem;">
+          Selamat datang di dasbor CVku. Kelola profil dan kembangkan portofolio kegiatan akademik serta non-akademik Anda.
+        </p>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary">+ Tambah Kegiatan</a>
+        <a href="{{ url_for('cv_preview_page') }}" class="btn btn-secondary">📄 Lihat & Unduh CV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistik Cepat -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <span class="stat-label">Total Kegiatan</span>
+      <span class="stat-value">{{ stats.total }}</span>
+      <span class="stat-desc">Semua pencapaian dicatat</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Disetujui di CV</span>
+      <span class="stat-value" style="color: #16a34a;">{{ stats.disetujui }}</span>
+      <span class="stat-desc">Tampil pada dokumen CV</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Menunggu Verifikasi</span>
+      <span class="stat-value" style="color: #d97706;">{{ stats.menunggu }}</span>
+      <span class="stat-desc">Dalam proses kurasi</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Versi CV Diunduh</span>
+      <span class="stat-value" style="color: var(--primary);">{{ stats.versi_cv }}</span>
+      <span class="stat-desc">Tersimpan di riwayat</span>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;" class="dashboard-grid">
+    <!-- Kegiatan Terbaru -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Kegiatan Terbaru</h2>
+          <p class="card-subtitle">Pencapaian yang terakhir kali Anda masukkan ke sistem</p>
+        </div>
+        <a href="{{ url_for('daftar_pencapaian_page') }}" class="btn btn-outline btn-sm">Lihat Semua</a>
+      </div>
+
+      {% if pencapaian_terbaru %}
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nama Kegiatan</th>
+                <th>Bagian CV</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in pencapaian_terbaru %}
+                <tr>
+                  <td>
+                    <strong>{{ p.nama_kegiatan }}</strong>
+                    {% if p.peran %}<br><small style="color: var(--muted);">{{ p.peran }}</small>{% endif %}
+                  </td>
+                  <td>
+                    <span class="badge badge-section">{{ p.bagian or 'Lainnya' }}</span>
+                  </td>
+                  <td>
+                    <span class="badge badge-{{ p.status }}">
+                      {% if p.status == 'disetujui' %}✓ Disetujui
+                      {% elif p.status == 'menunggu' %}⏳ Menunggu
+                      {% else %}✗ Ditolak{% endif %}
+                    </span>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('sunting_pencapaian_page', id=p.id) }}" class="btn btn-outline btn-sm">Sunting</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div style="text-align: center; padding: 2rem 1rem; color: var(--muted);">
+          <p style="margin-bottom: 1rem;">Belum ada kegiatan yang tercatat.</p>
+          <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary btn-sm">+ Tambah Kegiatan Pertama</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Kelengkapan Profil & Rekap Bagian -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Status Profil</h2>
+          <p class="card-subtitle">Identitas untuk header CV</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        {% set profil_terisi = profil.nama and profil.email and profil.telepon and profil.kota %}
+        {% if profil_terisi %}
+          <div style="padding: 0.75rem; background-color: var(--success-bg); border-radius: var(--radius-sm); border: 1px solid var(--success-border); color: var(--success-text); font-size: 0.875rem;">
+            ✓ <strong>Profil Lengkap</strong>. Siap dicetak pada dokumen CV.
+          </div>
+        {% else %}
+          <div style="padding: 0.75rem; background-color: var(--warning-bg); border-radius: var(--radius-sm); border: 1px solid var(--warning-border); color: var(--warning-text); font-size: 0.875rem;">
+            ⏳ <strong>Profil Belum Lengkap</strong>. Lengkapi nama, kontak, dan ringkasan agar CV tampil profesional.
+          </div>
+        {% endif %}
+      </div>
+
+      <div style="font-size: 0.875rem; margin-bottom: 1.25rem;">
+        <p><strong>Nama:</strong> {{ profil.nama or '-' }}</p>
+        <p><strong>Email:</strong> {{ profil.email or '-' }}</p>
+        <p><strong>Telepon:</strong> {{ profil.telepon or '-' }}</p>
+        <p><strong>Kota:</strong> {{ profil.kota or '-' }}</p>
+      </div>
+
+      <a href="{{ url_for('profil') }}" class="btn btn-outline btn-sm" style="width: 100%;">Ubah Profil</a>
+    </div>
+  </div>
+
+{% elif session.get('peran') == 'verifikator' %}
+  <!-- Dashboard Verifikator -->
+  <div class="card" style="background: linear-gradient(135deg, #0f766e 0%, #115e59 100%); color: #ffffff; padding: 2rem;">
+    <h1 style="font-size: 1.85rem; font-weight: 800; color: #ffffff;">Panel Verifikator Kampus 🎓</h1>
+    <p style="color: #ccfbf1; font-size: 0.95rem; margin-top: 0.25rem;">
+      Selamat datang, {{ session.get('nama') or session.get('username') }}. Anda memiliki akses untuk memvalidasi pencapaian mahasiswa.
+    </p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <span class="stat-label">Pencapaian Menunggu</span>
+      <span class="stat-value" style="color: #d97706;">{{ stats.menunggu }}</span>
+      <span class="stat-desc">Memerlukan verifikasi Anda</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Pencapaian Disetujui</span>
+      <span class="stat-value" style="color: #16a34a;">{{ stats.disetujui }}</span>
+      <span class="stat-desc">Telah disahkan untuk CV</span>
+    </div>
+  </div>
+
+  <div class="card" style="text-align: center; padding: 2.5rem 1rem;">
+    <h2 style="font-size: 1.35rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">
+      Periksa Antrean Verifikasi Mahasiswa
+    </h2>
+    <p style="color: var(--muted); max-width: 500px; margin: 0 auto 1.5rem;">
+      Tinjau keabsahan kegiatan, peran, penyelenggara, dan hasil uraian AI sebelum dimasukkan ke CV resmi mahasiswa.
+    </p>
+    <a href="{{ url_for('verifikator_page') }}" class="btn btn-primary btn-lg">
+      Buka Antrean Verifikasi ({{ stats.menunggu }})
+    </a>
+  </div>
+{% endif %}
+{% endblock %}

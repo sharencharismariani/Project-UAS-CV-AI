@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Daftar Pencapaian - CVku{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div>
+      <h1 class="card-title">Daftar Kegiatan &amp; Pencapaian</h1>
+      <p class="card-subtitle">Semua kegiatan yang telah Anda tambahkan ke dalam portofolio CVku</p>
+    </div>
+    <div>
+      <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary">+ Tambah Kegiatan Baru</a>
+    </div>
+  </div>
+
+  {% if daftar %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">#</th>
+            <th>Nama Kegiatan</th>
+            <th>Bagian CV</th>
+            <th>Periode &amp; Lokasi</th>
+            <th>Status</th>
+            <th style="text-align: right; width: 170px;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in daftar %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>
+                <div style="font-weight: 700; color: var(--dark);">{{ p.nama_kegiatan }}</div>
+                {% if p.judul %}
+                  <div style="font-size: 0.825rem; color: var(--primary);">CV: {{ p.judul }}</div>
+                {% endif %}
+                {% if p.peran or p.penyelenggara %}
+                  <div style="font-size: 0.8rem; color: var(--muted);">
+                    {{ p.peran if p.peran else '' }}{% if p.peran and p.penyelenggara %} • {% endif %}{{ p.penyelenggara if p.penyelenggara else '' }}
+                  </div>
+                {% endif %}
+              </td>
+              <td>
+                <span class="badge badge-section">{{ p.bagian or 'Lainnya' }}</span>
+              </td>
+              <td>
+                <span style="font-size: 0.85rem;">
+                  {{ p.periode if p.periode else '-' }}
+                  {% if p.lokasi %}<br><small style="color: var(--muted);">{{ p.lokasi }}</small>{% endif %}
+                </span>
+              </td>
+              <td>
+                <span class="badge badge-{{ p.status }}">
+                  {% if p.status == 'disetujui' %}✓ Disetujui
+                  {% elif p.status == 'menunggu' %}⏳ Menunggu
+                  {% else %}✗ Ditolak{% endif %}
+                </span>
+              </td>
+              <td style="text-align: right; white-space: nowrap;">
+                <a href="{{ url_for('sunting_pencapaian_page', id=p.id) }}" class="btn btn-outline btn-sm">
+                  Sunting
+                </a>
+                <form method="POST" action="{{ url_for('hapus_pencapaian_action', id=p.id) }}" style="display: inline-block;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pencapaian \'{{ p.nama_kegiatan }}\'? Data CV dan poin terkait juga akan dihapus.');">
+                  <button type="submit" class="btn btn-danger-outline btn-sm">
+                    Hapus
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div style="text-align: center; padding: 3rem 1rem;">
+      <div style="font-size: 3rem; margin-bottom: 0.75rem;">📂</div>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Belum Ada Pencapaian</h3>
+      <p style="color: var(--muted); max-width: 450px; margin: 0 auto 1.5rem;">
+        Anda belum menambahkan kegiatan atau pencapaian apa pun. Klik tombol di bawah untuk mulai menambahkan.
+      </p>
+      <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary btn-lg">+ Tambah Kegiatan Pertama</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

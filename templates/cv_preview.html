@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}CV Saya &amp; Unduh - CVku{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+  <div>
+    <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--dark);">Pratinjau CV ATS Mahasiswa</h1>
+    <p style="color: var(--muted); font-size: 0.9rem;">
+      Format satu kolom standar ATS: tanpa tabel, tanpa gambar, rapi, dan mudah dibaca oleh parser ATS maupun rekruter.
+    </p>
+  </div>
+  
+  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+    <a href="{{ url_for('cv_riwayat_page') }}" class="btn btn-outline">📂 Riwayat Unduhan</a>
+    <a href="{{ url_for('unduh_cv_action') }}" class="btn btn-primary btn-lg">
+      ⬇ Unduh CV (.docx)
+    </a>
+  </div>
+</div>
+
+{% if not cv_ada %}
+  <div class="card" style="text-align: center; padding: 2.5rem 1.5rem; background-color: var(--warning-bg); border-color: var(--warning-border);">
+    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚠️</div>
+    <h3 style="color: var(--warning-text); font-weight: 700; margin-bottom: 0.5rem;">CV Masih Kosong</h3>
+    <p style="color: var(--warning-text); max-width: 540px; margin: 0 auto 1.25rem; font-size: 0.95rem;">
+      Belum ada pencapaian yang berstatus <strong>disetujui</strong>. Pastikan Anda telah menambahkan kegiatan dan menyimpannya ke CV, atau menunggu persetujuan verifikator.
+    </p>
+    <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary">+ Tambah Kegiatan Sekarang</a>
+  </div>
+{% endif %}
+
+<!-- Kertas Pratinjau CV (ATS-Friendly Paper Simulation) -->
+<div class="cv-paper">
+  <!-- Kepala CV: Nama & Kontak -->
+  <div class="cv-header">
+    <div class="cv-name">{{ profil.nama or session.get('username') or 'NAMA MAHASISWA' }}</div>
+    <div class="cv-contact">
+      {% set kontak_list = [] %}
+      {% if profil.email %}{% set _ = kontak_list.append(profil.email) %}{% endif %}
+      {% if profil.telepon %}{% set _ = kontak_list.append(profil.telepon) %}{% endif %}
+      {% if profil.kota %}{% set _ = kontak_list.append(profil.kota) %}{% endif %}
+      {% if profil.linkedin %}{% set _ = kontak_list.append(profil.linkedin) %}{% endif %}
+      
+      {{ kontak_list|join(' | ') if kontak_list else 'Email | Nomor Telepon | Kota | LinkedIn' }}
+    </div>
+  </div>
+
+  <!-- Ringkasan Profil (Jika Ada) -->
+  {% if profil.ringkasan %}
+    <div class="cv-section">
+      <div class="cv-section-title">Ringkasan Profil</div>
+      <p style="font-size: 0.95rem; text-align: justify;">{{ profil.ringkasan }}</p>
+    </div>
+  {% endif %}
+
+  <!-- Tiap Bagian Sesuai Urutan skema.BAGIAN -->
+  {% for bag in urutan_bagian %}
+    {% if cv.get(bag) %}
+      <div class="cv-section">
+        <div class="cv-section-title">{{ bag }}</div>
+        
+        {% for entri in cv[bag] %}
+          <div class="cv-item">
+            <div class="cv-item-title">{{ entri.judul }}</div>
+            
+            {% set meta_list = [] %}
+            {% if entri.penyelenggara %}{% set _ = meta_list.append(entri.penyelenggara) %}{% endif %}
+            {% if entri.lokasi %}{% set _ = meta_list.append(entri.lokasi) %}{% endif %}
+            {% if entri.periode %}{% set _ = meta_list.append(entri.periode) %}{% endif %}
+            
+            {% if meta_list %}
+              <div class="cv-item-meta">{{ meta_list|join(' | ') }}</div>
+            {% endif %}
+
+            {% if entri.poin %}
+              <ul class="cv-bullet-list">
+                {% for p in entri.poin %}
+                  <li>{{ p }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<div style="text-align: center; margin-top: 1.5rem; margin-bottom: 2rem;">
+  <a href="{{ url_for('unduh_cv_action') }}" class="btn btn-primary btn-lg">
+    ⬇ Unduh Dokumen CV Resmi (.docx)
+  </a>
+</div>
+{% endblock %}

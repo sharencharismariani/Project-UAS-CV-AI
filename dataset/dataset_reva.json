@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "reva_latih_01",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "FILKOM Mengajar",
+      "penyelenggara": "BEM FILKOM",
+      "peran": "Project Officer",
+      "periode": "Maret 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "jadi PO program mengajar anak SD, ngatur 20 panitia, bikin rundown dan koordinasi dengan sekolah"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Project Officer - FILKOM Mengajar",
+      "poin": [
+        "Memimpin pelaksanaan program mengajar untuk siswa SD sebagai Project Officer",
+        "Mengoordinasikan 20 panitia serta menyusun rundown dan komunikasi dengan pihak sekolah"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_02",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Himpunan Mahasiswa Sistem Informasi",
+      "penyelenggara": "HMSI",
+      "peran": "Staf Divisi Humas",
+      "periode": "Januari 2023 - Desember 2023",
+      "lokasi": "Malang",
+      "uraian": "bikin poster dan caption instagram, balas pesan dari luar organisasi, bantu dokumentasi acara"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Staf Divisi Humas - Himpunan Mahasiswa Sistem Informasi",
+      "poin": [
+        "Mendesain poster dan menulis keterangan unggahan Instagram untuk kegiatan himpunan",
+        "Menangani korespondensi eksternal dan membantu dokumentasi acara"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_03",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Seminar Nasional Teknologi Informasi",
+      "penyelenggara": "Himpunan Mahasiswa Informatika",
+      "peran": "Ketua Pelaksana",
+      "periode": "Oktober 2024 - November 2024",
+      "lokasi": "Surabaya",
+      "uraian": "memimpin panitia 35 orang, seminar dihadiri 300 peserta, mengurus sponsor dan pembicara"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Ketua Pelaksana - Seminar Nasional Teknologi Informasi",
+      "poin": [
+        "Memimpin 35 panitia dalam perencanaan dan pelaksanaan seminar nasional",
+        "Mengelola kerja sama sponsor dan pengisi acara hingga seminar dihadiri 300 peserta"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_04",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Bakti Sosial Desa Binaan",
+      "penyelenggara": "UKM Peduli Sesama",
+      "peran": "Sekretaris",
+      "periode": "Februari 2023 - Mei 2023",
+      "lokasi": "Batu",
+      "uraian": "bikin surat menyurat, notulen rapat, dan laporan kegiatan baksos"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Sekretaris - Bakti Sosial Desa Binaan",
+      "poin": [
+        "Menyusun surat-menyurat, notulen rapat, dan laporan kegiatan bakti sosial",
+        "Mengelola arsip dokumen kepanitiaan agar mudah ditelusuri"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_05",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Lomba Desain Poster Tingkat SMA",
+      "penyelenggara": "BEM Fakultas Ilmu Komputer",
+      "peran": "Koordinator Divisi Acara",
+      "periode": "Agustus 2024 - September 2024",
+      "lokasi": "Malang",
+      "uraian": "ngatur jalannya lomba, jadwal juri, dan MC, tanpa kendala saat hari H"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Koordinator Divisi Acara - Lomba Desain Poster Tingkat SMA",
+      "poin": [
+        "Mengoordinasikan jalannya lomba termasuk jadwal juri dan pembawa acara",
+        "Memastikan acara berjalan sesuai rencana pada hari pelaksanaan"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_06",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Dewan Perwakilan Mahasiswa",
+      "penyelenggara": "DPM Universitas",
+      "peran": "Anggota Komisi Aspirasi",
+      "periode": "Januari 2024 - Desember 2024",
+      "lokasi": "Malang",
+      "uraian": "nampung aspirasi mahasiswa lewat google form, rekap, dan sampaikan ke pimpinan fakultas"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Anggota Komisi Aspirasi - Dewan Perwakilan Mahasiswa",
+      "poin": [
+        "Menghimpun aspirasi mahasiswa melalui formulir daring dan merekapnya",
+        "Menyampaikan hasil rekapan aspirasi kepada pimpinan fakultas"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_07",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Pengkaderan Mahasiswa Baru",
+      "penyelenggara": "BEM Fakultas",
+      "peran": "Mentor Kelompok",
+      "periode": "Agustus 2023 - Agustus 2023",
+      "lokasi": "Malang",
+      "uraian": "mendampingi 12 mahasiswa baru selama pengkaderan, jadi tempat bertanya soal kampus"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Mentor Kelompok - Pengkaderan Mahasiswa Baru",
+      "poin": [
+        "Mendampingi 12 mahasiswa baru selama kegiatan pengkaderan",
+        "Memberikan arahan seputar lingkungan dan kegiatan kampus"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_08",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Komunitas Pemrograman Kampus",
+      "penyelenggara": "Komunitas Coding Club",
+      "peran": "Bendahara",
+      "periode": "Januari 2024 - Desember 2024",
+      "lokasi": "Yogyakarta",
+      "uraian": "kelola uang kas, catat pemasukan pengeluaran tiap bulan, buat laporan keuangan"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Bendahara - Komunitas Pemrograman Kampus",
+      "poin": [
+        "Mengelola kas komunitas dengan mencatat pemasukan dan pengeluaran setiap bulan",
+        "Menyusun laporan keuangan periodik untuk pengurus"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_09",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Workshop Desain UI/UX",
+      "penyelenggara": "Himpunan Mahasiswa Sistem Informasi",
+      "peran": "Divisi Perlengkapan",
+      "periode": "April 2023 - April 2023",
+      "lokasi": "Malang",
+      "uraian": "menyiapkan proyektor, laptop, dan ruangan buat workshop sehari"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Divisi Perlengkapan - Workshop Desain UI/UX",
+      "poin": [
+        "Menyiapkan perlengkapan dan ruangan untuk pelaksanaan workshop satu hari",
+        "Memastikan perangkat presentasi siap digunakan selama acara"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_10",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Kampanye Kebersihan Kampus",
+      "penyelenggara": "UKM Lingkungan",
+      "peran": "Ketua Divisi Publikasi",
+      "periode": "Maret 2024 - April 2024",
+      "lokasi": "Semarang",
+      "uraian": "bikin video pendek dan poster kampanye, diunggah ke tiktok dan instagram"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Ketua Divisi Publikasi - Kampanye Kebersihan Kampus",
+      "poin": [
+        "Memimpin divisi publikasi dalam pembuatan video pendek dan poster kampanye",
+        "Mengelola publikasi konten di TikTok dan Instagram"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_11",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Pelatihan Public Speaking",
+      "penyelenggara": "UKM Debat",
+      "peran": "Pemateri",
+      "periode": "November 2023 - November 2023",
+      "lokasi": "Malang",
+      "uraian": "membawakan materi dasar public speaking ke anggota baru sekitar 25 orang"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Pemateri - Pelatihan Public Speaking",
+      "poin": [
+        "Menyampaikan materi dasar public speaking kepada sekitar 25 anggota baru",
+        "Memfasilitasi sesi latihan berbicara bagi peserta"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_12",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Turnamen Futsal Antar Jurusan",
+      "penyelenggara": "BEM Fakultas",
+      "peran": "Wakil Ketua Pelaksana",
+      "periode": "September 2023 - Oktober 2023",
+      "lokasi": "Malang",
+      "uraian": "bantu ketua mengatur panitia, jadwal pertandingan 8 tim, dan komunikasi dengan wasit"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Wakil Ketua Pelaksana - Turnamen Futsal Antar Jurusan",
+      "poin": [
+        "Mendukung ketua pelaksana dalam mengoordinasikan kepanitiaan turnamen",
+        "Menyusun jadwal pertandingan untuk 8 tim dan berkoordinasi dengan wasit"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_01",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Pekan Kreativitas Mahasiswa",
+      "penyelenggara": "BEM Universitas",
+      "peran": "Koordinator Sponsorship",
+      "periode": "Juli 2024 - Oktober 2024",
+      "lokasi": "Malang",
+      "uraian": "cari sponsor lewat proposal, dapat 6 sponsor, pasang booth saat acara"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Koordinator Sponsorship - Pekan Kreativitas Mahasiswa",
+      "poin": [
+        "Mengoordinasikan pencarian sponsor melalui penyusunan dan pengiriman proposal",
+        "Berhasil menggandeng 6 sponsor dan menyiapkan booth pada hari acara"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_02",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Jurnal Mahasiswa Kampus",
+      "penyelenggara": "UKM Pers Mahasiswa",
+      "peran": "Reporter",
+      "periode": "Januari 2023 - Desember 2023",
+      "lokasi": "Malang",
+      "uraian": "nulis berita kegiatan kampus, wawancara narasumber, dimuat di web kampus"
+    },
+    "output": {
+      "bagian": "Pengalaman Organisasi",
+      "judul": "Reporter - Jurnal Mahasiswa Kampus",
+      "poin": [
+        "Menulis berita kegiatan kampus berdasarkan hasil wawancara narasumber",
+        "Menerbitkan tulisan pada situs pers mahasiswa"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_13",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Pengembang Web",
+      "penyelenggara": "PT Teknologi Nusantara",
+      "peran": "Web Developer Intern",
+      "periode": "Juli 2024 - September 2024",
+      "lokasi": "Jakarta",
+      "uraian": "3 bulan bikin halaman admin pakai Laravel, benerin bug, rapat mingguan dengan tim"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Web Developer Intern - Magang Pengembang Web",
+      "poin": [
+        "Mengembangkan halaman admin menggunakan Laravel selama magang 3 bulan",
+        "Memperbaiki bug dan mengikuti rapat mingguan bersama tim pengembang"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_14",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Analis Data",
+      "penyelenggara": "Bank Daerah Sejahtera",
+      "peran": "Data Analyst Intern",
+      "periode": "Juni 2024 - Agustus 2024",
+      "lokasi": "Surabaya",
+      "uraian": "bersihin data nasabah di excel, buat dashboard sederhana di power bi"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Data Analyst Intern - Magang Analis Data",
+      "poin": [
+        "Membersihkan data nasabah menggunakan Excel",
+        "Membuat dashboard sederhana dengan Power BI untuk mendukung pelaporan"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_15",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Desain Grafis",
+      "penyelenggara": "CV Kreasi Visual",
+      "peran": "Graphic Design Intern",
+      "periode": "Januari 2024 - Maret 2024",
+      "lokasi": "Bandung",
+      "uraian": "desain feed instagram klien, banner promo, dan revisi sesuai feedback"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Graphic Design Intern - Magang Desain Grafis",
+      "poin": [
+        "Mendesain unggahan Instagram dan banner promosi untuk klien",
+        "Merevisi desain berdasarkan masukan klien dan tim"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_16",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Administrasi Perkantoran",
+      "penyelenggara": "Dinas Komunikasi dan Informatika",
+      "peran": "Staf Administrasi Magang",
+      "periode": "Februari 2024 - April 2024",
+      "lokasi": "Malang",
+      "uraian": "input data surat masuk keluar, scan arsip, bantu bikin laporan bulanan"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Staf Administrasi Magang - Magang Administrasi Perkantoran",
+      "poin": [
+        "Menginput data surat masuk dan keluar ke sistem pencatatan",
+        "Memindai arsip dan membantu penyusunan laporan bulanan"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_17",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Dukungan Teknis",
+      "penyelenggara": "PT Jaringan Mandiri",
+      "peran": "IT Support Intern",
+      "periode": "Agustus 2023 - Oktober 2023",
+      "lokasi": "Surabaya",
+      "uraian": "bantu troubleshooting laptop dan printer karyawan, instal software, catat tiket keluhan"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "IT Support Intern - Magang Dukungan Teknis",
+      "poin": [
+        "Membantu pemecahan masalah laptop dan printer karyawan",
+        "Menginstal perangkat lunak dan mencatat tiket keluhan pengguna"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_18",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Pemasaran Digital",
+      "penyelenggara": "Startup Toko Kopi Lokal",
+      "peran": "Digital Marketing Intern",
+      "periode": "Maret 2024 - Mei 2024",
+      "lokasi": "Yogyakarta",
+      "uraian": "bikin jadwal konten, tulis caption, dan pantau insight instagram tiap minggu"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Digital Marketing Intern - Magang Pemasaran Digital",
+      "poin": [
+        "Menyusun jadwal konten dan menulis keterangan unggahan media sosial",
+        "Memantau insight Instagram setiap minggu sebagai bahan evaluasi konten"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_19",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Magang Quality Assurance",
+      "penyelenggara": "PT Aplikasi Cerdas",
+      "peran": "QA Tester Intern",
+      "periode": "September 2024 - Desember 2024",
+      "lokasi": "Jakarta",
+      "uraian": "uji aplikasi mobile secara manual, tulis test case 40 skenario, lapor bug lewat Jira"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "QA Tester Intern - Magang Quality Assurance",
+      "poin": [
+        "Menguji aplikasi mobile secara manual dan menulis test case untuk 40 skenario",
+        "Melaporkan temuan bug melalui Jira"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_03",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Magang Sistem Informasi",
+      "penyelenggara": "Rumah Sakit Umum Daerah",
+      "peran": "Staf IT Magang",
+      "periode": "Juli 2024 - Agustus 2024",
+      "lokasi": "Malang",
+      "uraian": "bantu maintenance database pasien, backup rutin tiap minggu, dan pelatihan singkat pengguna"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Staf IT Magang - Magang Sistem Informasi",
+      "poin": [
+        "Membantu pemeliharaan basis data pasien dan melakukan backup rutin setiap minggu",
+        "Mendampingi pelatihan singkat bagi pengguna sistem"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_04",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Magang Penulisan Konten",
+      "penyelenggara": "Media Edukasi Online",
+      "peran": "Content Writer Intern",
+      "periode": "Oktober 2024 - Desember 2024",
+      "lokasi": "Remote",
+      "uraian": "nulis artikel edukasi tiap minggu, riset topik, dan edit tulisan sesuai arahan editor"
+    },
+    "output": {
+      "bagian": "Magang",
+      "judul": "Content Writer Intern - Magang Penulisan Konten",
+      "poin": [
+        "Menulis artikel edukasi setiap minggu berdasarkan riset topik",
+        "Menyunting tulisan sesuai arahan editor"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_20",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Sistem Informasi Perpustakaan",
+      "penyelenggara": "Mata Kuliah Basis Data",
+      "peran": "Pengembang Basis Data",
+      "periode": "Oktober 2023 - Desember 2023",
+      "lokasi": "Malang",
+      "uraian": "bikin database peminjaman buku pakai MySQL, rancang ERD, dan query laporan"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Pengembang Basis Data - Sistem Informasi Perpustakaan",
+      "poin": [
+        "Merancang ERD dan basis data peminjaman buku menggunakan MySQL",
+        "Menyusun query untuk menghasilkan laporan peminjaman"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_21",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Aplikasi Kasir UMKM",
+      "penyelenggara": "Proyek Kelompok Rekayasa Perangkat Lunak",
+      "peran": "Ketua Tim Pengembang",
+      "periode": "Maret 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "jadi ketua tim 4 orang, bikin aplikasi kasir web untuk warung, hasil diuji pemilik warung"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Ketua Tim Pengembang - Aplikasi Kasir UMKM",
+      "poin": [
+        "Memimpin tim beranggotakan 4 orang dalam pengembangan aplikasi kasir berbasis web",
+        "Menguji aplikasi bersama pemilik warung sebagai pengguna"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_22",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Klasifikasi Sentimen Ulasan Produk",
+      "penyelenggara": "Tugas Mata Kuliah Pembelajaran Mesin",
+      "peran": "Peneliti",
+      "periode": "April 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "pakai naive bayes untuk klasifikasi ulasan, preprocessing teks, akurasi 82 persen"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Peneliti - Klasifikasi Sentimen Ulasan Produk",
+      "poin": [
+        "Membangun model klasifikasi sentimen ulasan produk menggunakan Naive Bayes",
+        "Melakukan preprocessing teks dan memperoleh akurasi 82 persen"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_23",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Website Profil Desa Wisata",
+      "penyelenggara": "Pengabdian Masyarakat",
+      "peran": "Front-End Developer",
+      "periode": "Juli 2024 - Agustus 2024",
+      "lokasi": "Batu",
+      "uraian": "bikin tampilan web desa wisata pakai html css, responsif di hp"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Front-End Developer - Website Profil Desa Wisata",
+      "poin": [
+        "Mengembangkan tampilan situs profil desa wisata menggunakan HTML dan CSS",
+        "Menyesuaikan tampilan agar responsif pada perangkat seluler"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_24",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Dashboard Penjualan Toko",
+      "penyelenggara": "Tugas Akhir Mata Kuliah Visualisasi Data",
+      "peran": "Analis Data",
+      "periode": "November 2023 - Desember 2023",
+      "lokasi": "Malang",
+      "uraian": "visualisasi data penjualan 1 tahun pakai Tableau, tampilkan tren bulanan dan produk terlaris"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Analis Data - Dashboard Penjualan Toko",
+      "poin": [
+        "Memvisualisasikan data penjualan satu tahun menggunakan Tableau",
+        "Menampilkan tren bulanan dan produk terlaris pada dashboard"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_25",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Aplikasi Pencatat Keuangan Mahasiswa",
+      "penyelenggara": "Proyek Pribadi",
+      "peran": "Pengembang Tunggal",
+      "periode": "Januari 2024 - Februari 2024",
+      "lokasi": "Malang",
+      "uraian": "bikin app android sederhana pakai Flutter buat catat pengeluaran harian"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Pengembang Tunggal - Aplikasi Pencatat Keuangan Mahasiswa",
+      "poin": [
+        "Mengembangkan aplikasi Android pencatat pengeluaran harian menggunakan Flutter",
+        "Merancang dan membangun fitur secara mandiri dari awal hingga selesai"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_26",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Prediksi Harga Rumah",
+      "penyelenggara": "Tugas Mata Kuliah Data Mining",
+      "peran": "Anggota Tim",
+      "periode": "Mei 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "pakai regresi linear, bersihkan outlier, bandingkan dengan random forest"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Anggota Tim - Prediksi Harga Rumah",
+      "poin": [
+        "Membangun model prediksi harga rumah menggunakan regresi linear",
+        "Membersihkan outlier dan membandingkan hasil dengan Random Forest"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_27",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Desain Antarmuka Aplikasi Pemesanan Makanan",
+      "penyelenggara": "Tugas Mata Kuliah Interaksi Manusia dan Komputer",
+      "peran": "UI/UX Designer",
+      "periode": "Oktober 2023 - November 2023",
+      "lokasi": "Malang",
+      "uraian": "bikin wireframe dan prototype di Figma, uji ke 8 pengguna"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "UI/UX Designer - Desain Antarmuka Aplikasi Pemesanan Makanan",
+      "poin": [
+        "Merancang wireframe dan prototype aplikasi pemesanan makanan di Figma",
+        "Menguji prototype kepada 8 pengguna untuk mendapatkan masukan"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_28",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Chatbot FAQ Kampus",
+      "penyelenggara": "Proyek Mata Kuliah Pengolahan Bahasa Alami",
+      "peran": "Pengembang",
+      "periode": "Juni 2024 - Juli 2024",
+      "lokasi": "Malang",
+      "uraian": "bikin chatbot jawab pertanyaan jadwal dan syarat KRS pakai Python"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Pengembang - Chatbot FAQ Kampus",
+      "poin": [
+        "Membangun chatbot berbasis Python untuk menjawab pertanyaan seputar jadwal dan persyaratan KRS",
+        "Menyusun daftar pertanyaan dan jawaban sebagai basis pengetahuan"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_29",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Sistem Presensi Berbasis QR",
+      "penyelenggara": "Proyek Kelompok",
+      "peran": "Back-End Developer",
+      "periode": "Februari 2024 - April 2024",
+      "lokasi": "Surabaya",
+      "uraian": "bikin API presensi pakai Node.js, simpan di PostgreSQL"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Back-End Developer - Sistem Presensi Berbasis QR",
+      "poin": [
+        "Mengembangkan API presensi dengan Node.js",
+        "Mengelola penyimpanan data presensi pada PostgreSQL"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_05",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Deteksi Penyakit Daun Tomat",
+      "penyelenggara": "Tugas Mata Kuliah Pengolahan Citra",
+      "peran": "Peneliti",
+      "periode": "Maret 2024 - Mei 2024",
+      "lokasi": "Malang",
+      "uraian": "pakai CNN untuk klasifikasi gambar daun, 3 kelas penyakit, akurasi 90 persen"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Peneliti - Deteksi Penyakit Daun Tomat",
+      "poin": [
+        "Membangun model CNN untuk mengklasifikasikan citra daun tomat ke dalam 3 kelas penyakit",
+        "Mencapai akurasi 90 persen pada data pengujian"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_06",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Website Toko Online Batik",
+      "penyelenggara": "Proyek Mata Kuliah Pemrograman Web",
+      "peran": "Full-Stack Developer",
+      "periode": "Agustus 2023 - Desember 2023",
+      "lokasi": "Malang",
+      "uraian": "bikin web jualan batik pakai PHP, ada keranjang dan checkout"
+    },
+    "output": {
+      "bagian": "Proyek",
+      "judul": "Full-Stack Developer - Website Toko Online Batik",
+      "poin": [
+        "Mengembangkan situs toko online batik menggunakan PHP",
+        "Mengimplementasikan fitur keranjang belanja dan checkout"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_30",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Google Data Analytics Certificate",
+      "penyelenggara": "Coursera",
+      "peran": "",
+      "periode": "Maret 2024 - Mei 2024",
+      "lokasi": "Daring",
+      "uraian": "kursus online soal analisis data, belajar SQL, spreadsheet, dan visualisasi"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Google Data Analytics Certificate",
+      "poin": [
+        "Menyelesaikan program sertifikasi analisis data secara daring",
+        "Mempelajari SQL, spreadsheet, dan visualisasi data"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_31",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Belajar Dasar Pemrograman Python",
+      "penyelenggara": "Dicoding",
+      "peran": "",
+      "periode": "Januari 2024 - Februari 2024",
+      "lokasi": "Daring",
+      "uraian": "kelas dasar python, selesai semua modul dan submission"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Belajar Dasar Pemrograman Python",
+      "poin": [
+        "Menyelesaikan kelas dasar pemrograman Python",
+        "Menuntaskan seluruh modul dan tugas submission"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_32",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Sertifikasi Kompetensi Junior Web Developer",
+      "penyelenggara": "BNSP",
+      "peran": "",
+      "periode": "Juni 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "lulus uji kompetensi skema junior web developer"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Sertifikasi Kompetensi Junior Web Developer",
+      "poin": [
+        "Lulus uji kompetensi pada skema Junior Web Developer",
+        "Memperoleh sertifikat kompetensi dari BNSP"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_33",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "TOEFL ITP",
+      "penyelenggara": "Lembaga Bahasa Universitas",
+      "peran": "",
+      "periode": "Oktober 2023 - Oktober 2023",
+      "lokasi": "Malang",
+      "uraian": "ikut tes TOEFL ITP, skor 550"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "TOEFL ITP",
+      "poin": [
+        "Mengikuti tes TOEFL ITP",
+        "Memperoleh skor 550"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_34",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Microsoft Office Specialist Excel",
+      "penyelenggara": "Microsoft",
+      "peran": "",
+      "periode": "Agustus 2023 - Agustus 2023",
+      "lokasi": "Surabaya",
+      "uraian": "ujian sertifikasi Excel, lulus"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Microsoft Office Specialist Excel",
+      "poin": [
+        "Lulus ujian sertifikasi Microsoft Office Specialist Excel",
+        "Menunjukkan kemampuan pengolahan data menggunakan Excel"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_35",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Dasar UI/UX Design",
+      "penyelenggara": "Skill Academy",
+      "peran": "",
+      "periode": "April 2024 - April 2024",
+      "lokasi": "Daring",
+      "uraian": "belajar prinsip desain dan figma selama 2 minggu"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Dasar UI/UX Design",
+      "poin": [
+        "Mempelajari prinsip dasar desain antarmuka dan penggunaan Figma",
+        "Menyelesaikan pelatihan selama 2 minggu"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_36",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Pelatihan Cloud Computing Dasar",
+      "penyelenggara": "AWS Educate",
+      "peran": "",
+      "periode": "September 2024 - September 2024",
+      "lokasi": "Daring",
+      "uraian": "ikut pelatihan dasar cloud, belajar EC2 dan S3"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Pelatihan Cloud Computing Dasar",
+      "poin": [
+        "Mengikuti pelatihan dasar komputasi awan",
+        "Mempelajari layanan EC2 dan S3"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_37",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Belajar Dasar Manajemen Proyek",
+      "penyelenggara": "Dicoding",
+      "peran": "",
+      "periode": "Maret 2024 - Maret 2024",
+      "lokasi": "Daring",
+      "uraian": "kelas manajemen proyek, paham agile dan scrum"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Belajar Dasar Manajemen Proyek",
+      "poin": [
+        "Menyelesaikan kelas dasar manajemen proyek",
+        "Memahami konsep Agile dan Scrum"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_07",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Fundamental Basis Data MySQL",
+      "penyelenggara": "Digital Talent Scholarship",
+      "peran": "",
+      "periode": "Juli 2024 - Juli 2024",
+      "lokasi": "Daring",
+      "uraian": "pelatihan 5 hari, belajar membuat tabel, query join, dan normalisasi"
+    },
+    "output": {
+      "bagian": "Sertifikasi",
+      "judul": "Fundamental Basis Data MySQL",
+      "poin": [
+        "Mengikuti pelatihan basis data MySQL selama 5 hari",
+        "Mempelajari pembuatan tabel, query join, dan normalisasi"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_38",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Lomba Desain Poster Nasional",
+      "penyelenggara": "Universitas Gadjah Mada",
+      "peran": "Juara 2",
+      "periode": "Mei 2024 - Mei 2024",
+      "lokasi": "Yogyakarta",
+      "uraian": "juara 2 lomba poster tingkat nasional, tema lingkungan"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Juara 2 - Lomba Desain Poster Nasional",
+      "poin": [
+        "Meraih Juara 2 pada lomba desain poster tingkat nasional bertema lingkungan",
+        "Bersaing dengan peserta dari berbagai perguruan tinggi"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_39",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Hackathon Kampus",
+      "penyelenggara": "Himpunan Mahasiswa Informatika",
+      "peran": "Juara 1",
+      "periode": "Oktober 2023 - Oktober 2023",
+      "lokasi": "Malang",
+      "uraian": "juara 1 hackathon 24 jam, bikin aplikasi manajemen sampah"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Juara 1 - Hackathon Kampus",
+      "poin": [
+        "Meraih Juara 1 pada hackathon selama 24 jam",
+        "Mengembangkan aplikasi manajemen sampah dalam waktu kompetisi"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_40",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Beasiswa Prestasi Akademik",
+      "penyelenggara": "Universitas",
+      "peran": "Penerima Beasiswa",
+      "periode": "Agustus 2023 - Agustus 2024",
+      "lokasi": "Malang",
+      "uraian": "dapat beasiswa karena IPK 3,85 selama 2 semester"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Penerima Beasiswa - Beasiswa Prestasi Akademik",
+      "poin": [
+        "Menerima Beasiswa Prestasi Akademik dari universitas",
+        "Mempertahankan IPK 3,85 selama 2 semester"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_41",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Lomba Karya Tulis Ilmiah",
+      "penyelenggara": "Kementerian Pendidikan",
+      "peran": "Finalis",
+      "periode": "September 2024 - Oktober 2024",
+      "lokasi": "Jakarta",
+      "uraian": "lolos final lomba KTI tingkat nasional, presentasi di depan juri"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Finalis - Lomba Karya Tulis Ilmiah",
+      "poin": [
+        "Lolos sebagai finalis lomba karya tulis ilmiah tingkat nasional",
+        "Mempresentasikan karya di hadapan dewan juri"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_42",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Mahasiswa Berprestasi Fakultas",
+      "penyelenggara": "Fakultas Ilmu Komputer",
+      "peran": "Peringkat 3",
+      "periode": "November 2024 - November 2024",
+      "lokasi": "Malang",
+      "uraian": "juara 3 pemilihan mahasiswa berprestasi tingkat fakultas"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Peringkat 3 - Mahasiswa Berprestasi Fakultas",
+      "poin": [
+        "Meraih peringkat 3 pada pemilihan mahasiswa berprestasi tingkat fakultas",
+        "Dinilai berdasarkan prestasi akademik dan nonakademik"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_43",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Kompetisi UI/UX Mahasiswa",
+      "penyelenggara": "Telkom University",
+      "peran": "Juara Harapan 1",
+      "periode": "Maret 2024 - Maret 2024",
+      "lokasi": "Bandung",
+      "uraian": "dapat juara harapan 1 lomba desain aplikasi"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Juara Harapan 1 - Kompetisi UI/UX Mahasiswa",
+      "poin": [
+        "Meraih Juara Harapan 1 pada kompetisi desain aplikasi tingkat mahasiswa",
+        "Mempresentasikan rancangan antarmuka kepada juri"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_44",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Lomba Cerdas Cermat Informatika",
+      "penyelenggara": "Universitas Brawijaya",
+      "peran": "Juara 3",
+      "periode": "Februari 2024 - Februari 2024",
+      "lokasi": "Malang",
+      "uraian": "juara 3 cerdas cermat tim 3 orang"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Juara 3 - Lomba Cerdas Cermat Informatika",
+      "poin": [
+        "Meraih Juara 3 pada lomba cerdas cermat informatika",
+        "Berkompetisi dalam tim beranggotakan 3 orang"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_45",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Pitching Ide Bisnis Mahasiswa",
+      "penyelenggara": "Inkubator Bisnis Kampus",
+      "peran": "Pitching Terbaik",
+      "periode": "Juni 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "ide bisnis aplikasi laundry terpilih jadi pitching terbaik"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Pitching Terbaik - Pitching Ide Bisnis Mahasiswa",
+      "poin": [
+        "Terpilih sebagai pitching ide bisnis terbaik melalui gagasan aplikasi laundry",
+        "Mempresentasikan rencana bisnis kepada panel penilai"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_08",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Lomba Esai Nasional",
+      "penyelenggara": "Universitas Indonesia",
+      "peran": "Juara 1",
+      "periode": "Agustus 2024 - Agustus 2024",
+      "lokasi": "Depok",
+      "uraian": "juara 1 lomba esai tentang transformasi digital"
+    },
+    "output": {
+      "bagian": "Penghargaan",
+      "judul": "Juara 1 - Lomba Esai Nasional",
+      "poin": [
+        "Meraih Juara 1 pada lomba esai nasional bertema transformasi digital",
+        "Menyusun gagasan secara tertulis untuk dinilai juri tingkat nasional"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_46",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Sarjana Sistem Informasi",
+      "penyelenggara": "Universitas Brawijaya",
+      "peran": "",
+      "periode": "2022 - sekarang",
+      "lokasi": "Malang",
+      "uraian": "kuliah S1 sistem informasi, IPK 3,78, fokus basis data dan analisis data"
+    },
+    "output": {
+      "bagian": "Pendidikan",
+      "judul": "Sarjana Sistem Informasi",
+      "poin": [
+        "Menempuh studi Sarjana Sistem Informasi dengan IPK 3,78",
+        "Berfokus pada bidang basis data dan analisis data"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_47",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "SMA Negeri 1 Malang",
+      "penyelenggara": "SMA Negeri 1 Malang",
+      "peran": "",
+      "periode": "2019 - 2022",
+      "lokasi": "Malang",
+      "uraian": "jurusan IPA, aktif di OSIS"
+    },
+    "output": {
+      "bagian": "Pendidikan",
+      "judul": "SMA Negeri 1 Malang",
+      "poin": [
+        "Menempuh pendidikan menengah atas pada jurusan IPA",
+        "Aktif dalam kegiatan OSIS"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_48",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Program Pertukaran Pelajar Semester",
+      "penyelenggara": "Kampus Merdeka",
+      "peran": "",
+      "periode": "Februari 2024 - Juni 2024",
+      "lokasi": "Bandung",
+      "uraian": "kuliah satu semester di kampus lain, ambil mata kuliah pemrograman mobile"
+    },
+    "output": {
+      "bagian": "Pendidikan",
+      "judul": "Program Pertukaran Pelajar Semester",
+      "poin": [
+        "Mengikuti program pertukaran pelajar selama satu semester di perguruan tinggi lain",
+        "Mengambil mata kuliah pemrograman mobile"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_09",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Diploma Tiga Teknik Informatika",
+      "penyelenggara": "Politeknik Negeri Malang",
+      "peran": "",
+      "periode": "2020 - 2023",
+      "lokasi": "Malang",
+      "uraian": "lulus D3 dengan IPK 3,60, tugas akhir tentang sistem inventaris"
+    },
+    "output": {
+      "bagian": "Pendidikan",
+      "judul": "Diploma Tiga Teknik Informatika",
+      "poin": [
+        "Lulus Diploma Tiga Teknik Informatika dengan IPK 3,60",
+        "Menyelesaikan tugas akhir tentang sistem inventaris"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_49",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Keterampilan Teknis",
+      "penyelenggara": "",
+      "peran": "",
+      "periode": "",
+      "lokasi": "",
+      "uraian": "Python, SQL, Excel, Figma, dan Git"
+    },
+    "output": {
+      "bagian": "Lainnya",
+      "judul": "Keterampilan Teknis",
+      "poin": [
+        "Python, SQL, Excel, Figma, dan Git"
+      ]
+    }
+  },
+  {
+    "id": "reva_latih_50",
+    "split": "latih",
+    "input": {
+      "nama_kegiatan": "Relawan Pengajar Anak Jalanan",
+      "penyelenggara": "Komunitas Berbagi Ilmu",
+      "peran": "Relawan",
+      "periode": "Januari 2024 - Juni 2024",
+      "lokasi": "Malang",
+      "uraian": "ngajar baca tulis anak tiap sabtu sore"
+    },
+    "output": {
+      "bagian": "Lainnya",
+      "judul": "Relawan - Relawan Pengajar Anak Jalanan",
+      "poin": [
+        "Mengajar baca tulis kepada anak-anak setiap Sabtu sore",
+        "Berkontribusi sebagai relawan pada komunitas pendidikan nonformal"
+      ]
+    }
+  },
+  {
+    "id": "reva_uji_10",
+    "split": "uji",
+    "input": {
+      "nama_kegiatan": "Bahasa",
+      "penyelenggara": "",
+      "peran": "",
+      "periode": "",
+      "lokasi": "",
+      "uraian": "Indonesia (ibu), Inggris (aktif), Jepang (dasar)"
+    },
+    "output": {
+      "bagian": "Lainnya",
+      "judul": "Bahasa",
+      "poin": [
+        "Bahasa Indonesia (bahasa ibu)",
+        "Bahasa Inggris (aktif)",
+        "Bahasa Jepang (dasar)"
+      ]
+    }
+  }
+]
