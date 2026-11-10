@@ -63,8 +63,8 @@ db.BACKUP_PATH = os.environ["CVKU_DB_BACKUP"]
 db.init_db()
 
 # Konfigurasi AUTO_APPROVE:
-# Default False jika fitur verifikator aktif, atau True jika diaktifkan via environment variable
-AUTO_APPROVE_ENV = os.environ.get("CVKU_AUTO_APPROVE", os.environ.get("AUTO_APPROVE", "False"))
+# Default True: setiap pencapaian yang disimpan langsung otomatis disetujui untuk CV
+AUTO_APPROVE_ENV = os.environ.get("CVKU_AUTO_APPROVE", os.environ.get("AUTO_APPROVE", "True"))
 AUTO_APPROVE = AUTO_APPROVE_ENV.lower() in ("true", "1", "yes")
 
 # -----------------------------------------------------------------------------
