@@ -1,4 +1,4 @@
-# CVku — Aplikasi Penyusun CV ATS-Friendly Mahasiswa Berbasis AI
+# Project UAS CV AI — CVku: Aplikasi Penyusun CV ATS-Friendly Mahasiswa Berbasis AI
 
 Aplikasi web **CVku** dibangun menggunakan **Python Flask** (template Jinja2 dan CSS khusus yang bersih, modern, dan responsif tanpa framework JavaScript berat). Aplikasi ini membantu mahasiswa menyusun Curriculum Vitae (CV) berstandar ATS (*Applicant Tracking System*) secara cepat dan terarah menggunakan bantuan kecerdasan buatan.
 
@@ -72,7 +72,7 @@ Seluruh antarmuka dirancang dalam **Bahasa Indonesia**, dengan validasi formulir
 ## Struktur Folder Proyek
 
 ```
-UTS_AI_CV/
+Project-UAS-CV-AI/ (atau UTS_AI_CV/)
 ├── app.py                  # Aplikasi utama Flask (routing, auth, kontroler, DOCX)
 ├── db.py                   # Modul database SQLite (asli, tidak diubah)
 ├── ai_service.py           # Jembatan AI (stub/local/remote) (asli, tidak diubah)
