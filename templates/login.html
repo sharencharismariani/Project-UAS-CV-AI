@@ -26,31 +26,9 @@
       </button>
     </form>
 
-    <!-- Tombol Isi Cepat Demo -->
-    <div class="demo-account-box">
-      <strong>Klik Cepat Akun Uji Coba:</strong>
-      <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap;">
-        <button type="button" class="btn btn-outline btn-sm" onclick="isiAkun('demo', 'demo123')" style="flex: 1;">
-          Pengguna Demo (demo)
-        </button>
-        <button type="button" class="btn btn-outline btn-sm" onclick="isiAkun('budi_pm', 'demo123')" style="flex: 1;">
-          Product Manager (budi_pm)
-        </button>
-      </div>
-    </div>
-
     <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--muted);">
       Belum memiliki akun? <a href="{{ url_for('register') }}" style="font-weight: 600;">Daftar di sini</a>
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-  function isiAkun(u, p) {
-    document.getElementById('username').value = u;
-    document.getElementById('password').value = p;
-  }
-</script>
 {% endblock %}
