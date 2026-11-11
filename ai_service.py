@@ -1,5 +1,5 @@
 """ai_service.py - jembatan SI ke model AI. Mode: stub | local | remote."""
-import os, json, time
+import os, json, time, re
 
 MODE = os.environ.get("CVKU_AI_MODE", "stub")          # stub | local | remote
 REMOTE_URL = os.environ.get("CVKU_AI_URL", "")           # dipakai mode remote
@@ -9,9 +9,47 @@ BAGIAN_VALID = ["Pendidikan", "Pengalaman Organisasi", "Magang", "Proyek",
                 "Sertifikasi", "Penghargaan", "Lainnya"]
 
 
+def _pecah_uraian_ke_poin(uraian):
+    """Pecah uraian user menjadi beberapa poin CV secara fleksibel tanpa template buatan."""
+    uraian = (uraian or "").strip()
+    if not uraian:
+        return []
+
+    # 1. Pisahkan berdasarkan enter / baris baru / list numbering / bullet
+    baris = [re.sub(r"^[\s•\-*\d.]+\s*", "", b).strip() for b in re.split(r"\r?\n+", uraian) if b.strip()]
+    baris = [b for b in baris if b]
+    if len(baris) > 1:
+        return [b[0].upper() + b[1:] for b in baris]
+
+    # 2. Pisahkan berdasarkan tanda akhir kalimat (. ! ?)
+    kalimat = [k.strip().rstrip(".!?") for k in re.split(r"(?<=[.!?])\s+", uraian) if k.strip()]
+    kalimat = [k for k in kalimat if k]
+    if len(kalimat) > 1:
+        return [k[0].upper() + k[1:] for k in kalimat]
+
+    # 3. Pisahkan berdasarkan titik koma (;)
+    if ";" in uraian:
+        tk = [k.strip().rstrip(";") for k in uraian.split(";") if k.strip()]
+        if len(tk) > 1:
+            return [k[0].upper() + k[1:] for k in tk]
+
+    # 4. Pisahkan berdasarkan koma (,) atau kata sambung ', dan ' jika berupa daftar kegiatan
+    if "," in uraian:
+        koma = [
+            re.sub(r"^(?:dan|serta)\s+", "", p.strip(), flags=re.IGNORECASE).rstrip(".,;")
+            for p in re.split(r"(?<!\d),\s*(?:dan\s+|serta\s+)?", uraian, flags=re.IGNORECASE)
+            if p.strip()
+        ]
+        koma = [p for p in koma if len(p) > 2]
+        if len(koma) > 1:
+            return [k[0].upper() + k[1:] for k in koma]
+
+    return [uraian[0].upper() + uraian[1:]]
+
+
 def _stub(data):
     """Hasil dummy dengan format sama seperti AI asli."""
-    teks = f"{data.get('nama_kegiatan', '')} {data.get('uraian', '')}".lower()
+    teks = f"{data.get('nama_kegiatan', '')} {data.get('peran', '')} {data.get('uraian', '')}".lower()
     if any(k in teks for k in ("juara", "lomba", "beasiswa", "penghargaan")):
         bagian = "Penghargaan"
     elif any(k in teks for k in ("magang", "intern")):
@@ -20,17 +58,17 @@ def _stub(data):
         bagian = "Proyek"
     elif any(k in teks for k in ("sertifikat", "kursus", "pelatihan")):
         bagian = "Sertifikasi"
-    elif any(k in teks for k in ("organisasi", "himpunan", "ketua", "panitia")):
+    elif any(k in teks for k in ("organisasi", "himpunan", "ketua", "panitia", "staff", "acara", "divisi", "koordinator")):
         bagian = "Pengalaman Organisasi"
     else:
         bagian = "Lainnya"
     uraian = (data.get("uraian") or "").strip()
-    # pecah uraian user jadi kalimat; TIDAK ada kalimat template buatan sistem
-    kalimat = [k.strip() for k in re.split(r"(?<=[.!?])\s+|\n+", uraian) if k.strip()]
+    # pecah uraian user jadi poin-poin sesuai input user; TIDAK ada kalimat template buatan sistem
+    poin = _pecah_uraian_ke_poin(uraian)
     return {
         "bagian": bagian,
         "judul": data.get("nama_kegiatan", "Tanpa judul"),
-        "poin": kalimat[:3] or [uraian or data.get("nama_kegiatan", "Tanpa judul")],
+        "poin": poin[:5] or [uraian or data.get("nama_kegiatan", "Tanpa judul")],
     }
 
 
