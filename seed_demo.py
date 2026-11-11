@@ -44,12 +44,12 @@ def seed():
             {
                 "username": "demo",
                 "password": "demo123",
-                "nama": "Sharen Mahasiswa Demo",
-                "email": "demo@student.filkom.ub.ac.id",
+                "nama": "Sharen Charismariani",
+                "email": "sharen@student.filkom.ub.ac.id",
                 "telepon": "081234567890",
                 "kota": "Malang",
-                "linkedin": "linkedin.com/in/demomahasiswa",
-                "headline": "Mahasiswa Sistem Informasi | Aspiring Full-Stack & AI Engineer",
+                "linkedin": "linkedin.com/in/sharencharismariani",
+                "headline": "Sistem Informasi | Aspiring Full-Stack & AI Engineer",
                 "skill": "Python, Flask, React, System Analysis, ATS Optimization, SQL",
                 "ringkasan": "Mahasiswa Sistem Informasi tingkat akhir dengan minat besar pada rekayasa perangkat lunak dan arsitektur data cerdas. Aktif memimpin kepanitiaan teknologi kampus dan menyelesaikan proyek web modern.",
                 "kegiatan": [

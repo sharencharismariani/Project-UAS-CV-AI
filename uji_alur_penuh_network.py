@@ -37,13 +37,13 @@ def jalankan_pengujian_penuh():
     print("\n[Tahap 2] Menguji Login Akun Demo...")
     res = client.post("/login", data={"username": "demo", "password": "demo123"}, follow_redirects=True)
     assert res.status_code == 200
-    assert "Sharen Mahasiswa Demo" in res.data.decode("utf-8")
+    assert "Sharen Charismariani" in res.data.decode("utf-8")
     print("  ✓ Login mahasiswa demo berhasil dan sesi terpasang.")
 
     # 3. Uji Isi Profil (Headline, Skill, Ringkasan)
     print("\n[Tahap 3] Menguji Pengisian Profil (Headline & Skill)...")
     res = client.post("/profil", data={
-        "nama": "Sharen Mahasiswa Demo",
+        "nama": "Sharen Charismariani",
         "headline": "Lead Full-Stack Engineer & AI Enthusiast | Final Year Student",
         "skill": "Python, Flask, React, ATS Optimization, Microservices, System Design",
         "email": "demo@student.filkom.ub.ac.id",
@@ -129,7 +129,7 @@ def jalankan_pengujian_penuh():
     # Budi melihat permintaan koneksi masuk
     res = client.get("/jaringan?tab=permintaan")
     html_budi_req = res.data.decode("utf-8")
-    assert "Sharen Mahasiswa Demo" in html_budi_req
+    assert "Sharen Charismariani" in html_budi_req
 
     con = db.koneksi()
     k_req = con.execute("SELECT id FROM koneksi WHERE id_pengirim = 1 AND id_penerima = 3 AND status = 'menunggu'").fetchone()
@@ -142,14 +142,14 @@ def jalankan_pengujian_penuh():
 
     # Cek bahwa di daftar Budi ada Demo
     res = client.get("/jaringan?tab=koneksi")
-    assert "Sharen Mahasiswa Demo" in res.data.decode("utf-8")
+    assert "Sharen Charismariani" in res.data.decode("utf-8")
 
     # Sesi kembali ke Demo
     with client.session_transaction() as sess:
         sess["user_id"] = 1
         sess["username"] = "demo"
-        sess["peran"] = "mahasiswa"
-        sess["nama"] = "Sharen Mahasiswa Demo"
+        sess["peran"] = "pengguna"
+        sess["nama"] = "Sharen Charismariani"
 
     # Cek bahwa di daftar Demo ada Budi
     res = client.get("/jaringan?tab=koneksi")
@@ -199,7 +199,7 @@ def jalankan_pengujian_penuh():
     assert len(doc.inline_shapes) == 0, f"Ditemukan {len(doc.inline_shapes)} gambar pada dokumen CV ATS (harus 0)!"
 
     seluruh_teks = "\n".join(p.text for p in doc.paragraphs)
-    assert "SHAREN MAHASISWA DEMO" in seluruh_teks
+    assert "SHAREN CHARISMARIANI" in seluruh_teks
     assert "Malang" in seluruh_teks
     assert "Technical Lead - Capstone Sistem Cerdas Kampus" in seluruh_teks
     print(f"  ✓ KRITERIA ACCEPTANCE: Dokumen DOCX memenuhi standar ATS (0 tabel, 0 gambar, satu kolom).")

@@ -623,7 +623,7 @@ def unduh_cv_action():
     cv = db.baca_cv_pengguna(user_id, hanya_disetujui=False)
 
     # Buat nama berkas timestamp unik
-    nama_mentah = profil.get("nama") or session.get("username") or "Mahasiswa"
+    nama_mentah = profil.get("nama") or session.get("username") or "Pengguna"
     nama_bersih = re.sub(r"[^a-zA-Z0-9_]", "_", nama_mentah)
     waktu_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     nama_file = f"CV_{nama_bersih}_{waktu_str}.docx"
