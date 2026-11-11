@@ -119,10 +119,7 @@ a:hover {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--dark);
+  gap: 0.65rem;
   text-decoration: none;
 }
 
@@ -130,11 +127,44 @@ a:hover {
   background: linear-gradient(135deg, var(--royal-blue), var(--sapphire));
   color: var(--quicksand);
   border: 1px solid var(--quicksand);
-  padding: 0.2rem 0.55rem;
+  padding: 0.35rem 0.6rem;
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: 0.5px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(17, 34, 80, 0.15);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--royal-blue);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  padding: 0;
+}
+
+.brand-subtitle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--sapphire);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  margin-top: 2px; /* Jarak dipersempit dan sangat proporsional */
+  padding: 0;
 }
 
 .nav-menu {
@@ -975,15 +1005,15 @@ textarea.form-control {
   line-height: 1.15;
   color: var(--royal-blue);
   letter-spacing: -0.02em;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
 }
 
 .elevate-subheadline {
   font-size: 1.08rem;
-  line-height: 1.65;
+  line-height: 1.6;
   color: #4a5568;
   max-width: 520px;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
 }
 
 .elevate-cta-group {
