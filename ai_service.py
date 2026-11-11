@@ -3,7 +3,7 @@ import os, json, time
 
 MODE = os.environ.get("CVKU_AI_MODE", "stub")          # stub | local | remote
 REMOTE_URL = os.environ.get("CVKU_AI_URL", "")           # dipakai mode remote
-VERSI_MODEL = {"stub": "stub-v1", "local": "qwen-run1", "remote": "qwen-run1-remote"}
+VERSI_MODEL = {"stub": "stub-v1", "local": "qwen-50data", "remote": "qwen-50data-remote"}
 
 BAGIAN_VALID = ["Pendidikan", "Pengalaman Organisasi", "Magang", "Proyek",
                 "Sertifikasi", "Penghargaan", "Lainnya"]
@@ -24,21 +24,20 @@ def _stub(data):
         bagian = "Pengalaman Organisasi"
     else:
         bagian = "Lainnya"
+    uraian = (data.get("uraian") or "").strip()
+    # pecah uraian user jadi kalimat; TIDAK ada kalimat template buatan sistem
+    kalimat = [k.strip() for k in re.split(r"(?<=[.!?])\s+|\n+", uraian) if k.strip()]
     return {
         "bagian": bagian,
         "judul": data.get("nama_kegiatan", "Tanpa judul"),
-        "poin": [
-            f"Terlibat dalam {data.get('nama_kegiatan', 'kegiatan')} sebagai {data.get('peran') or 'peserta'}.",
-            "Menyelesaikan tanggung jawab dengan baik dan tepat waktu.",
-            "Mengembangkan kemampuan kerja sama dan komunikasi.",
-        ],
+        "poin": kalimat[:3] or [uraian or data.get("nama_kegiatan", "Tanpa judul")],
     }
 
 
 def _local(data):
     """Panggil model_qwen.py di runtime yang sama (butuh GPU). Sesuaikan nama fungsinya."""
     import model_qwen                                    # <- sesuaikan
-    return model_qwen.hasilkan(data)                     # <- sesuaikan, harus return dict/JSON string
+    return model_qwen.proses_pencapaian(data)                     # <- sesuaikan, harus return dict/JSON string
 
 
 def _remote(data):

@@ -39,7 +39,6 @@ os.makedirs(RIWAYAT_DIR, exist_ok=True)
 # Default environment variable sesuai ATURAN WAJIB
 os.environ.setdefault("CVKU_DB", os.path.join(DATA_DIR, "cvku.db"))
 os.environ.setdefault("CVKU_DB_BACKUP", os.path.join(DATA_DIR, "cvku_backup.db"))
-os.environ.setdefault("CVKU_AI_MODE", "stub")
 
 # Pulihkan cadangan jika ada di root namun belum ada di data/
 root_backup = os.path.join(BASE_DIR, "cvku_backup.db")
@@ -54,6 +53,15 @@ if os.path.exists(root_backup) and not os.path.exists(target_backup):
 import db
 import ai_service
 import skema
+
+# Pastikan modul re tersedia untuk ai_service._stub
+ai_service.re = re
+
+# Sinkronkan mode AI dan URL dari environment variable jika diset (tidak memaksa stub)
+if "CVKU_AI_MODE" in os.environ:
+    ai_service.MODE = os.environ["CVKU_AI_MODE"]
+if "CVKU_AI_URL" in os.environ:
+    ai_service.REMOTE_URL = os.environ["CVKU_AI_URL"]
 
 # Pastikan path pada db.py sinkron
 db.DB_PATH = os.environ["CVKU_DB"]
@@ -443,19 +451,16 @@ def tambah_pencapaian_page():
         pakai_fallback = False
         hasil_ai = None
         try:
+            if "CVKU_AI_MODE" in os.environ:
+                ai_service.MODE = os.environ["CVKU_AI_MODE"]
+            if "CVKU_AI_URL" in os.environ:
+                ai_service.REMOTE_URL = os.environ["CVKU_AI_URL"]
             hasil_ai = ai_service.proses_pencapaian(form_data)
         except Exception as err:
-            # Fallback otomatis ke stub
-            try:
-                hasil_ai = ai_service.proses_pencapaian(form_data, mode="stub")
-            except Exception:
-                hasil_ai = {
-                    "bagian": "Pengalaman Organisasi",
-                    "judul": f"{peran} - {nama_kegiatan}" if peran else nama_kegiatan,
-                    "poin": [f"Terlibat aktif dalam {nama_kegiatan}.", "Menyelesaikan tanggung jawab dengan baik."],
-                    "versi_model": "stub-fallback",
-                    "waktu_ms": 0
-                }
+            # Cetak penyebab error aslinya ke terminal untuk diagnosis
+            print(f"[AI SERVICE ERROR] Gagal memanggil AI ({getattr(ai_service, 'MODE', 'unknown')}): {err}", flush=True)
+            # Fallback otomatis ke stub tanpa menambah poin buatan sendiri
+            hasil_ai = ai_service.proses_pencapaian(form_data, mode="stub")
             pakai_fallback = True
 
         # 3. Simpan hasil AI & catat log AI
@@ -476,11 +481,11 @@ def tambah_pencapaian_page():
 
         # 4. Peringatan fallback dan arahkan ke halaman cek-sunting
         if pakai_fallback:
-            flash("AI sedang tidak tersedia, memakai hasil contoh.", "warning")
+            flash("AI sedang tidak tersedia, memakai uraian Anda.", "warning")
         else:
             flash("Kegiatan berhasil diproses oleh AI. Silakan periksa dan sunting sebelum disimpan.", "info")
 
-        return redirect(url_for("sunting_pencapaian_page", id=id_pencapaian))
+        return redirect(url_for("sunting_pencapaian_page", id=id_pencapaian, versi_model=hasil_ai.get("versi_model")))
 
     return render_template("pencapaian_tambah.html", form_data=form_data)
 
@@ -542,11 +547,28 @@ def sunting_pencapaian_page(id):
         return redirect(url_for("daftar_pencapaian_page"))
 
     entri = db.baca_entri(id)
+    versi_model = request.args.get("versi_model")
+    if not versi_model:
+        con = db.koneksi()
+        try:
+            r = con.execute(
+                "SELECT versi_model FROM log_ai WHERE id_pengguna=? ORDER BY id DESC LIMIT 1",
+                (user_id,)
+            ).fetchone()
+            if r and r["versi_model"]:
+                versi_model = r["versi_model"]
+        finally:
+            con.close()
+    if not versi_model:
+        mode_saat_ini = os.environ.get("CVKU_AI_MODE", getattr(ai_service, "MODE", "stub"))
+        versi_model = getattr(ai_service, "VERSI_MODEL", {}).get(mode_saat_ini, "stub-v1")
+
     return render_template(
         "pencapaian_sunting.html",
         pencapaian=pencapaian,
         entri=entri,
-        bagian_pilihan=skema.BAGIAN
+        bagian_pilihan=skema.BAGIAN,
+        versi_model=versi_model
     )
 
 
