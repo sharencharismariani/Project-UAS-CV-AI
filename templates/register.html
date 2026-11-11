@@ -7,7 +7,7 @@
   <div class="auth-card">
     <div class="auth-header">
       <h1 class="auth-title">Daftar Akun CVku</h1>
-      <p class="auth-subtitle">Buat akun mahasiswa baru di jejaring CVku</p>
+      <p class="auth-subtitle">Buat akun pengguna baru di jejaring CVku</p>
     </div>
 
     <form method="POST" action="{{ url_for('register') }}">
@@ -22,7 +22,7 @@
         <div class="form-hint">Hanya huruf, angka, dan garis bawah tanpa spasi.</div>
       </div>
 
-      <input type="hidden" name="peran" value="mahasiswa">
+      <input type="hidden" name="peran" value="pengguna">
 
       <div class="form-row">
         <div class="form-group">

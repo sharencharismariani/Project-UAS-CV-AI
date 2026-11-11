@@ -35,9 +35,11 @@ def seed():
         con.execute("DELETE FROM suka")
         con.execute("DELETE FROM posting")
         con.execute("DELETE FROM koneksi")
+        con.execute("DELETE FROM pengguna WHERE peran = 'verifikator' OR username = 'dosen'")
+        con.execute("UPDATE pengguna SET peran = 'pengguna'")
         con.commit()
 
-        # Daftar 10 Mahasiswa untuk Seed Demo
+        # Daftar 10 Pengguna Mahasiswa untuk Seed Demo
         daftar_mhs = [
             {
                 "username": "demo",
@@ -502,7 +504,7 @@ def seed():
                 uid = db.simpan_pengguna(
                     username=m["username"],
                     password=m["password"],
-                    peran="mahasiswa",
+                    peran="pengguna",
                     nama=m["nama"],
                     email=m["email"],
                     telepon=m["telepon"],
@@ -512,6 +514,8 @@ def seed():
                 )
             else:
                 uid = u["id"]
+                con.execute("UPDATE pengguna SET peran = 'pengguna' WHERE id = ?", (uid,))
+                con.commit()
                 db.perbarui_profil(
                     uid,
                     nama=m["nama"],

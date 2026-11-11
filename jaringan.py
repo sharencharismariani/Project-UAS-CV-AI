@@ -33,14 +33,44 @@ def init_jaringan():
     """Inisialisasi tabel jejaring dan migrasi kolom baru pada tabel pengguna."""
     con = db.koneksi()
     try:
-        # 1. Tambah kolom headline dan skill pada pengguna secara aman jika belum ada
+        # 1. Migrasi tabel pengguna: jadikan role sebagai 'pengguna' saja dan hapus verifikator
+        row_sql = con.execute("SELECT sql FROM sqlite_master WHERE name='pengguna'").fetchone()
+        if row_sql and ("'verifikator'" in row_sql[0] or "'mahasiswa'" in row_sql[0]):
+            con.execute("PRAGMA foreign_keys = OFF")
+            con.execute("""
+            CREATE TABLE IF NOT EXISTS pengguna_baru (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password_hash TEXT NOT NULL,
+                peran TEXT NOT NULL DEFAULT 'pengguna',
+                nama TEXT,
+                email TEXT,
+                telepon TEXT,
+                kota TEXT,
+                linkedin TEXT,
+                ringkasan TEXT,
+                headline TEXT,
+                skill TEXT
+            )
+            """)
+            con.execute("""
+            INSERT INTO pengguna_baru (id, username, password_hash, peran, nama, email, telepon, kota, linkedin, ringkasan, headline, skill)
+            SELECT id, username, password_hash, 'pengguna', nama, email, telepon, kota, linkedin, ringkasan, headline, skill
+            FROM pengguna WHERE peran != 'verifikator' AND username != 'dosen'
+            """)
+            con.execute("DROP TABLE pengguna")
+            con.execute("ALTER TABLE pengguna_baru RENAME TO pengguna")
+            con.execute("PRAGMA foreign_keys = ON")
+            con.commit()
+
+        # 2. Tambah kolom headline dan skill pada pengguna secara aman jika belum ada
         info_kolom = [row["name"] for row in con.execute("PRAGMA table_info(pengguna)").fetchall()]
         if "headline" not in info_kolom:
             con.execute("ALTER TABLE pengguna ADD COLUMN headline TEXT")
         if "skill" not in info_kolom:
             con.execute("ALTER TABLE pengguna ADD COLUMN skill TEXT")
 
-        # 2. Buat tabel koneksi
+        # 3. Buat tabel koneksi
         con.execute("""
         CREATE TABLE IF NOT EXISTS koneksi (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -112,7 +142,7 @@ def cari_mahasiswa(q: str = "", id_saat_ini: int = None):
         sql = (
             "SELECT u.id, u.username, u.nama, u.kota, u.headline, u.skill, u.linkedin, u.ringkasan "
             "FROM pengguna u "
-            "WHERE u.peran = 'mahasiswa'"
+            "WHERE u.peran IN ('pengguna', 'mahasiswa')"
         )
         params = []
 

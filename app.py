@@ -113,29 +113,23 @@ def login_required(f):
     return decorated_function
 
 
-def mahasiswa_required(f):
+def pengguna_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not session.get("user_id"):
-            flash("Silakan masuk terlebih dahulu.", "warning")
+            flash("Silakan masuk terlebih dahulu untuk mengakses halaman ini.", "warning")
             return redirect(url_for("login", next=request.path))
-        if session.get("peran") != "mahasiswa":
-            flash("Halaman ini khusus untuk pengguna dengan peran Mahasiswa.", "danger")
-            return redirect(url_for("beranda"))
         return f(*args, **kwargs)
     return decorated_function
+
+
+mahasiswa_required = pengguna_required
 
 
 def verifikator_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not session.get("user_id"):
-            flash("Silakan masuk terlebih dahulu.", "warning")
-            return redirect(url_for("login", next=request.path))
-        if session.get("peran") != "verifikator":
-            flash("Halaman ini khusus untuk verifikator kampus.", "danger")
-            return redirect(url_for("beranda"))
-        return f(*args, **kwargs)
+        return redirect(url_for("beranda"))
     return decorated_function
 
 
@@ -314,7 +308,7 @@ def register():
     if request.method == "POST":
         nama = request.form.get("nama", "").strip()
         username = request.form.get("username", "").strip()
-        peran = "mahasiswa"
+        peran = "pengguna"
         password = request.form.get("password", "")
         konfirmasi = request.form.get("konfirmasi_password", "")
 
@@ -689,62 +683,16 @@ def unduh_ulang_cv_action(id):
 
 
 # -----------------------------------------------------------------------------
-# Rute 9 (Prioritas 2): Halaman Verifikator
+# Rute 9: Verifikator Dinonaktifkan (Role Tunggal Pengguna)
 # -----------------------------------------------------------------------------
 @app.route("/verifikator")
-@verifikator_required
 def verifikator_page():
-    con = db.koneksi()
-    try:
-        # Ambil pencapaian berstatus 'menunggu' dari semua mahasiswa
-        sql = (
-            "SELECT p.*, u.nama AS nama_mahasiswa, u.username, b.nama AS bagian "
-            "FROM pencapaian p "
-            "JOIN pengguna u ON u.id = p.id_pengguna "
-            "LEFT JOIN entri_cv e ON e.id_pencapaian = p.id "
-            "LEFT JOIN bagian_cv b ON b.id = e.id_bagian "
-            "WHERE p.status = 'menunggu' ORDER BY p.id DESC"
-        )
-        antrean = [dict(r) for r in con.execute(sql).fetchall()]
-        for a in antrean:
-            a["entri"] = db.baca_entri(a["id"])
-
-        # Riwayat verifikasi terbaru oleh verifikator ini
-        sql_riwayat = (
-            "SELECT v.*, p.nama_kegiatan, u.nama AS nama_mahasiswa, u.username "
-            "FROM verifikasi v "
-            "JOIN pencapaian p ON p.id = v.id_pencapaian "
-            "JOIN pengguna u ON u.id = p.id_pengguna "
-            "WHERE v.id_verifikator = ? ORDER BY v.id DESC LIMIT 15"
-        )
-        riwayat_terverifikasi = [dict(r) for r in con.execute(sql_riwayat, (session["user_id"],)).fetchall()]
-    finally:
-        con.close()
-
-    return render_template(
-        "verifikator.html",
-        antrean=antrean,
-        riwayat_terverifikasi=riwayat_terverifikasi
-    )
+    return redirect(url_for("beranda"))
 
 
 @app.route("/verifikator/<int:id>/verifikasi", methods=["POST"])
-@verifikator_required
 def verifikasi_action(id):
-    status = request.form.get("status", "").strip()
-    catatan = request.form.get("catatan", "").strip() or None
-
-    if status not in ("disetujui", "ditolak"):
-        flash("Keputusan status verifikasi tidak valid.", "error")
-        return redirect(url_for("verifikator_page"))
-
-    id_verifikator = session["user_id"]
-    db.simpan_verifikasi(id, id_verifikator, status, catatan=catatan)
-    db.cadangkan()
-
-    status_teks = "disetujui untuk masuk ke CV" if status == "disetujui" else "ditolak"
-    flash(f"Pencapaian berhasil diverifikasi dan {status_teks}.", "success")
-    return redirect(url_for("verifikator_page"))
+    return redirect(url_for("beranda"))
 
 
 # -----------------------------------------------------------------------------
@@ -762,7 +710,7 @@ def jelajah_page():
 def profil_publik_page(id):
     mhs = db.baca_pengguna(id)
     if not mhs:
-        flash("Profil mahasiswa tidak ditemukan.", "error")
+        flash("Profil pengguna tidak ditemukan.", "error")
         return redirect(url_for("jelajah_page"))
 
     cv_data = db.baca_cv_pengguna(id, hanya_disetujui=False)
