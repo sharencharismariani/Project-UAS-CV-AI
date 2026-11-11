@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}{{ mhs.nama or mhs.username }} - Profil CVku Network{% endblock %}
+
+{% block content %}
+<div style="max-width: 860px; margin: 0 auto;">
+
+  <!-- Header Profil Publik -->
+  <div class="card" style="margin-bottom: 1.5rem; position: relative;">
+    <div style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
+      
+      <!-- Avatar Inisial Besar -->
+      <div class="avatar-circle avatar-lg" style="margin-top: 0.25rem;">
+        {{ (mhs.nama or mhs.username)[:2]|upper }}
+      </div>
+
+      <!-- Info Identitas Utama -->
+      <div style="flex: 1; min-width: 260px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--dark); margin: 0 0 0.2rem 0;">
+              {{ mhs.nama or mhs.username }}
+            </h1>
+            <p style="font-size: 0.9rem; color: var(--muted); margin: 0;">
+              @{{ mhs.username }} {% if mhs.kota %}• 📍 {{ mhs.kota }}{% endif %}
+            </p>
+          </div>
+
+          <!-- Tombol Hubungkan / Status Koneksi / Tombol Pemilik -->
+          <div>
+            {% if adalah_pemilik %}
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <a href="{{ url_for('profil') }}" class="btn btn-outline btn-sm">✏️ Sunting Profil</a>
+                <a href="{{ url_for('unduh_cv_action') }}" class="btn btn-primary btn-sm">📄 Unduh CV (DOCX)</a>
+              </div>
+            {% elif session.get('user_id') %}
+              {% if status_koneksi == 'terhubung' %}
+                <span class="badge" style="background: #dcfce7; color: #166534; border: 1px solid #86efac; padding: 0.5rem 0.85rem; font-size: 0.875rem;">
+                  ✓ Terhubung di Jaringan
+                </span>
+              {% elif status_koneksi == 'menunggu_keluar' %}
+                <span class="badge" style="background: #fef3c7; color: #92400e; border: 1px solid #fde68a; padding: 0.5rem 0.85rem; font-size: 0.875rem;">
+                  ⏳ Permintaan Terkirim (Menunggu Konfirmasi)
+                </span>
+              {% elif status_koneksi == 'menunggu_masuk' %}
+                <a href="{{ url_for('jaringan_page', tab='permintaan') }}" class="btn btn-primary btn-sm">
+                  🤝 Konfirmasi Permintaan Koneksi
+                </a>
+              {% else %}
+                <form method="POST" action="{{ url_for('kirim_koneksi_action', id=mhs.id) }}" style="margin: 0;">
+                  <button type="submit" class="btn btn-primary">
+                    + Hubungkan
+                  </button>
+                </form>
+              {% endif %}
+            {% else %}
+              <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm">
+                + Masuk untuk Terhubung
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Headline Profesional -->
+        <p style="font-size: 1.05rem; font-weight: 600; color: var(--primary); margin: 0.75rem 0 0.5rem 0; line-height: 1.4;">
+          {{ mhs.headline or 'Mahasiswa aktif dengan portofolio terverifikasi AI.' }}
+        </p>
+
+        <!-- Tautan LinkedIn (Email & Telepon disembunyikan sesuai PRD) -->
+        {% if mhs.linkedin %}
+          <div style="font-size: 0.875rem; color: var(--slate); margin-top: 0.4rem;">
+            🔗 <a href="{{ mhs.linkedin if mhs.linkedin.startswith('http') else 'https://' + mhs.linkedin }}" target="_blank" rel="noopener noreferrer" style="font-weight: 600;">
+              {{ mhs.linkedin }}
+            </a>
+          </div>
+        {% endif %}
+
+        <!-- Skill Tags -->
+        {% if skills %}
+          <div style="margin-top: 0.85rem;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Keahlian:</span>
+            <div class="skill-tags" style="margin-top: 0.35rem;">
+              {% for s in skills %}
+                <span class="skill-tag skill-tag-primary">{{ s }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Ringkasan Profil (Executive Summary) -->
+    {% if mhs.ringkasan %}
+      <div style="margin-top: 1.5rem; pt: 1rem; border-top: 1px solid var(--border); padding-top: 1.25rem;">
+        <h3 style="font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--dark); margin-bottom: 0.4rem;">
+          Tentang &amp; Ringkasan Profesional
+        </h3>
+        <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+          {{ mhs.ringkasan }}
+        </p>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Pencapaian & Portofolio per Bagian CV (Hasil AI Baku) -->
+  <div class="card">
+    <div class="card-header" style="margin-bottom: 1.25rem;">
+      <div>
+        <h2 class="card-title">Portofolio &amp; Rekam Jejak Kegiatan</h2>
+        <p class="card-subtitle">
+          Poin-poin baku berbobot hasil sintesis AI dari kegiatan nyata yang dilakukan mahasiswa
+        </p>
+      </div>
+      {% if adalah_pemilik %}
+        <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-outline btn-sm">+ Tambah Kegiatan</a>
+      {% endif %}
+    </div>
+
+    {% set total_entri = 0 %}
+    {% for b in urutan_bagian %}
+      {% if cv.get(b) %}
+        {% set total_entri = total_entri + cv[b]|length %}
+        <div style="margin-bottom: 1.75rem;">
+          <!-- Judul Bagian CV -->
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; border-bottom: 1.5px solid var(--border); padding-bottom: 0.35rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
+              {{ b }}
+            </h3>
+            <span class="badge badge-section" style="font-size: 0.75rem;">{{ cv[b]|length }} entri</span>
+          </div>
+
+          <!-- Daftar Entri dalam Bagian -->
+          {% for item in cv[b] %}
+            <div style="margin-bottom: 1.25rem; padding-left: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.35rem;">
+                <h4 style="font-size: 0.975rem; font-weight: 700; color: var(--dark); margin: 0;">
+                  {{ item.judul }}
+                </h4>
+                {% if item.periode %}
+                  <span style="font-size: 0.8rem; color: var(--muted); font-weight: 500;">
+                    {{ item.periode }}
+                  </span>
+                {% endif %}
+              </div>
+
+              <!-- Metadata Entri (Peran, Penyelenggara, Lokasi) -->
+              {% set meta_list = [] %}
+              {% if item.peran %}{% set _ = meta_list.append(item.peran) %}{% endif %}
+              {% if item.penyelenggara %}{% set _ = meta_list.append(item.penyelenggara) %}{% endif %}
+              {% if item.lokasi %}{% set _ = meta_list.append(item.lokasi) %}{% endif %}
+              {% if meta_list %}
+                <p style="font-size: 0.85rem; color: var(--slate); font-style: italic; margin: 0.15rem 0 0.5rem 0;">
+                  {{ meta_list|join(' • ') }}
+                </p>
+              {% endif %}
+
+              <!-- Poin-Poin Bullet Baku dari AI -->
+              {% if item.poin %}
+                <ul style="margin: 0.35rem 0 0 1.25rem; padding: 0; font-size: 0.9rem; line-height: 1.55; color: var(--slate);">
+                  {% for pt in item.poin %}
+                    <li style="margin-bottom: 0.25rem;">{{ pt }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% for b, items in cv.items() %}
+      {% if b not in urutan_bagian and items %}
+        {% set total_entri = total_entri + items|length %}
+        <div style="margin-bottom: 1.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; border-bottom: 1.5px solid var(--border); padding-bottom: 0.35rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
+              {{ b }}
+            </h3>
+            <span class="badge badge-section" style="font-size: 0.75rem;">{{ items|length }} entri</span>
+          </div>
+
+          {% for item in items %}
+            <div style="margin-bottom: 1.25rem; padding-left: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.35rem;">
+                <h4 style="font-size: 0.975rem; font-weight: 700; color: var(--dark); margin: 0;">
+                  {{ item.judul }}
+                </h4>
+                {% if item.periode %}
+                  <span style="font-size: 0.8rem; color: var(--muted); font-weight: 500;">
+                    {{ item.periode }}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% set meta_list = [] %}
+              {% if item.peran %}{% set _ = meta_list.append(item.peran) %}{% endif %}
+              {% if item.penyelenggara %}{% set _ = meta_list.append(item.penyelenggara) %}{% endif %}
+              {% if item.lokasi %}{% set _ = meta_list.append(item.lokasi) %}{% endif %}
+              {% if meta_list %}
+                <p style="font-size: 0.85rem; color: var(--slate); font-style: italic; margin: 0.15rem 0 0.5rem 0;">
+                  {{ meta_list|join(' • ') }}
+                </p>
+              {% endif %}
+
+              {% if item.poin %}
+                <ul style="margin: 0.35rem 0 0 1.25rem; padding: 0; font-size: 0.9rem; line-height: 1.55; color: var(--slate);">
+                  {% for pt in item.poin %}
+                    <li style="margin-bottom: 0.25rem;">{{ pt }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% if total_entri == 0 %}
+      <div style="text-align: center; padding: 2.5rem 1rem; color: var(--muted);">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📂</div>
+        <p style="margin-bottom: 0.75rem;">Mahasiswa ini belum mempublikasikan kegiatan portofolio.</p>
+        {% if adalah_pemilik %}
+          <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary btn-sm">+ Tambah Kegiatan Pertama Anda</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

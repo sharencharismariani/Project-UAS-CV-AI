@@ -7,7 +7,7 @@
   <div class="auth-card">
     <div class="auth-header">
       <h1 class="auth-title">Daftar Akun CVku</h1>
-      <p class="auth-subtitle">Buat akun mahasiswa atau verifikator kampus baru</p>
+      <p class="auth-subtitle">Buat akun mahasiswa baru di jejaring CVku</p>
     </div>
 
     <form method="POST" action="{{ url_for('register') }}">
@@ -22,13 +22,7 @@
         <div class="form-hint">Hanya huruf, angka, dan garis bawah tanpa spasi.</div>
       </div>
 
-      <div class="form-group">
-        <label for="peran" class="form-label">Peran Akun <span class="required">*</span></label>
-        <select id="peran" name="peran" class="form-control" required>
-          <option value="mahasiswa" {% if form_data and form_data.peran == 'mahasiswa' %}selected{% endif %}>Mahasiswa (Penyusun CV)</option>
-          <option value="verifikator" {% if form_data and form_data.peran == 'verifikator' %}selected{% endif %}>Verifikator (Dosen / Kurator Kampus)</option>
-        </select>
-      </div>
+      <input type="hidden" name="peran" value="mahasiswa">
 
       <div class="form-row">
         <div class="form-group">

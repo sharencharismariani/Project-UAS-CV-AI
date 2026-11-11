@@ -40,28 +40,28 @@
         </li>
 
         {% if session.get('user_id') %}
-          {% if session.get('peran') == 'mahasiswa' %}
-            <li class="nav-item {% if request.endpoint == 'profil' %}active{% endif %}">
-              <a href="{{ url_for('profil') }}">Profil Saya</a>
-            </li>
-            <li class="nav-item {% if request.endpoint == 'daftar_pencapaian_page' %}active{% endif %}">
-              <a href="{{ url_for('daftar_pencapaian_page') }}">Pencapaian</a>
-            </li>
-            <li class="nav-item {% if request.endpoint == 'tambah_pencapaian_page' %}active{% endif %}">
-              <a href="{{ url_for('tambah_pencapaian_page') }}">+ Tambah Kegiatan</a>
-            </li>
-            <li class="nav-item {% if request.endpoint == 'cv_preview_page' %}active{% endif %}">
-              <a href="{{ url_for('cv_preview_page') }}">CV Saya</a>
-            </li>
-            <li class="nav-item {% if request.endpoint == 'cv_riwayat_page' %}active{% endif %}">
-              <a href="{{ url_for('cv_riwayat_page') }}">Riwayat CV</a>
-            </li>
-          {% elif session.get('peran') == 'verifikator' %}
-            <li class="nav-item {% if request.endpoint == 'verifikator_page' %}active{% endif %}">
-              <a href="{{ url_for('verifikator_page') }}">Verifikasi Pencapaian</a>
-            </li>
-          {% endif %}
+          <li class="nav-item {% if request.endpoint == 'feed_page' %}active{% endif %}">
+            <a href="{{ url_for('feed_page') }}">Feed</a>
+          </li>
+          <li class="nav-item {% if request.endpoint == 'jelajah_page' %}active{% endif %}">
+            <a href="{{ url_for('jelajah_page') }}">Jelajah</a>
+          </li>
+          <li class="nav-item {% if request.endpoint == 'jaringan_page' %}active{% endif %}">
+            <a href="{{ url_for('jaringan_page') }}">Jaringan</a>
+          </li>
+          <li class="nav-item {% if request.endpoint == 'tambah_pencapaian_page' %}active{% endif %}">
+            <a href="{{ url_for('tambah_pencapaian_page') }}">+ Tambah Kegiatan</a>
+          </li>
+          <li class="nav-item {% if request.endpoint == 'cv_preview_page' %}active{% endif %}">
+            <a href="{{ url_for('cv_preview_page') }}">CV Saya</a>
+          </li>
+          <li class="nav-item {% if request.endpoint == 'profil' %}active{% endif %}">
+            <a href="{{ url_for('profil') }}">Profil</a>
+          </li>
         {% else %}
+          <li class="nav-item {% if request.endpoint == 'jelajah_page' %}active{% endif %}">
+            <a href="{{ url_for('jelajah_page') }}">Jelajah</a>
+          </li>
           <li class="nav-item {% if request.endpoint == 'login' %}active{% endif %}">
             <a href="{{ url_for('login') }}">Masuk</a>
           </li>
@@ -73,10 +73,9 @@
 
       {% if session.get('user_id') %}
         <div class="nav-user">
-          <span class="user-badge">
+          <a href="{{ url_for('profil_publik_page', id=session.get('user_id')) }}" class="user-badge" style="text-decoration: none;" title="Buka Profil Publik Saya">
             👤 {{ session.get('nama') or session.get('username') }}
-            <span class="user-role-tag {{ session.get('peran') }}">{{ session.get('peran') }}</span>
-          </span>
+          </a>
           <a href="{{ url_for('logout') }}" class="btn btn-outline btn-sm">Keluar</a>
         </div>
       {% endif %}

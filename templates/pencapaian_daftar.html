@@ -23,7 +23,6 @@
             <th>Nama Kegiatan</th>
             <th>Bagian CV</th>
             <th>Periode &amp; Lokasi</th>
-            <th>Status</th>
             <th style="text-align: right; width: 170px;">Aksi</th>
           </tr>
         </thead>
@@ -49,13 +48,6 @@
                 <span style="font-size: 0.85rem;">
                   {{ p.periode if p.periode else '-' }}
                   {% if p.lokasi %}<br><small style="color: var(--muted);">{{ p.lokasi }}</small>{% endif %}
-                </span>
-              </td>
-              <td>
-                <span class="badge badge-{{ p.status }}">
-                  {% if p.status == 'disetujui' %}✓ Disetujui
-                  {% elif p.status == 'menunggu' %}⏳ Menunggu
-                  {% else %}✗ Ditolak{% endif %}
                 </span>
               </td>
               <td style="text-align: right; white-space: nowrap;">

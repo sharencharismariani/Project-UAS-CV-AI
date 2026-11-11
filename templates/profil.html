@@ -18,6 +18,18 @@
       <div class="form-hint">Nama resmi yang akan menjadi judul utama CV Anda.</div>
     </div>
 
+    <div class="form-group">
+      <label for="headline" class="form-label">Headline Profesional <span class="required">*</span></label>
+      <input type="text" id="headline" name="headline" class="form-control" placeholder="Contoh: Mahasiswa Sistem Informasi | Aspiring Product Manager" value="{{ pengguna.headline or '' }}" required>
+      <div class="form-hint">Muncul di kartu jelajah mahasiswa dan profil publik Anda.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="skill" class="form-label">Keahlian &amp; Skills (Pisahkan dengan koma)</label>
+      <input type="text" id="skill" name="skill" class="form-control" placeholder="Contoh: Product Management, Agile Scrum, Python, Wireframing" value="{{ pengguna.skill or '' }}">
+      <div class="form-hint">Daftar tag skill yang akan ditampilkan di profil dan kartu jelajah.</div>
+    </div>
+
     <div class="form-row">
       <div class="form-group">
         <label for="email" class="form-label">Alamat Email</label>

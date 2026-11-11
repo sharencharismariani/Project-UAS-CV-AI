@@ -53,6 +53,7 @@ if os.path.exists(root_backup) and not os.path.exists(target_backup):
 import db
 import ai_service
 import skema
+import jaringan
 
 # Pastikan modul re tersedia untuk ai_service._stub
 ai_service.re = re
@@ -67,8 +68,9 @@ if "CVKU_AI_URL" in os.environ:
 db.DB_PATH = os.environ["CVKU_DB"]
 db.BACKUP_PATH = os.environ["CVKU_DB_BACKUP"]
 
-# Panggil db.init_db() saat aplikasi mulai
+# Panggil db.init_db() dan jaringan.init_jaringan() saat aplikasi mulai
 db.init_db()
+jaringan.init_jaringan()
 
 # Konfigurasi AUTO_APPROVE:
 # Default True: setiap pencapaian yang disimpan langsung otomatis disetujui untuk CV
@@ -248,31 +250,20 @@ def buat_file_docx(profil: dict, cv_data: dict, filepath: str):
 @app.route("/")
 def beranda():
     user_id = session.get("user_id")
-    peran = session.get("peran")
 
     profil = {}
-    stats = {"total": 0, "disetujui": 0, "menunggu": 0, "ditolak": 0, "versi_cv": 0}
+    stats = {"total": 0, "koneksi": 0, "permintaan": 0, "versi_cv": 0}
     pencapaian_terbaru = []
     ai_mode = os.environ.get("CVKU_AI_MODE", "stub")
 
     if user_id:
         profil = db.baca_pengguna(user_id) or {}
-        if peran == "mahasiswa":
-            semua = db.daftar_pencapaian(user_id)
-            stats["total"] = len(semua)
-            stats["disetujui"] = sum(1 for p in semua if p["status"] == "disetujui")
-            stats["menunggu"] = sum(1 for p in semua if p["status"] == "menunggu")
-            stats["ditolak"] = sum(1 for p in semua if p["status"] == "ditolak")
-            stats["versi_cv"] = len(db.daftar_versi_cv(user_id))
-            pencapaian_terbaru = semua[:5]
-        elif peran == "verifikator":
-            con = db.koneksi()
-            try:
-                stats["menunggu"] = con.execute("SELECT count(*) FROM pencapaian WHERE status='menunggu'").fetchone()[0]
-                stats["disetujui"] = con.execute("SELECT count(*) FROM pencapaian WHERE status='disetujui'").fetchone()[0]
-                stats["ditolak"] = con.execute("SELECT count(*) FROM pencapaian WHERE status='ditolak'").fetchone()[0]
-            finally:
-                con.close()
+        semua = db.daftar_pencapaian(user_id)
+        stats["total"] = len(semua)
+        stats["koneksi"] = len(jaringan.daftar_koneksi(user_id))
+        stats["permintaan"] = len(jaringan.permintaan_masuk(user_id))
+        stats["versi_cv"] = len(db.daftar_versi_cv(user_id))
+        pencapaian_terbaru = semua[:5]
 
     return render_template(
         "beranda.html",
@@ -323,7 +314,7 @@ def register():
     if request.method == "POST":
         nama = request.form.get("nama", "").strip()
         username = request.form.get("username", "").strip()
-        peran = request.form.get("peran", "").strip()
+        peran = "mahasiswa"
         password = request.form.get("password", "")
         konfirmasi = request.form.get("konfirmasi_password", "")
 
@@ -335,10 +326,6 @@ def register():
 
         if not re.match(r"^[a-zA-Z0-9_]+$", username):
             flash("Username hanya boleh terdiri dari huruf, angka, dan garis bawah (_).", "error")
-            return render_template("register.html", form_data=form_data)
-
-        if peran not in ("mahasiswa", "verifikator"):
-            flash("Peran yang dipilih tidak valid.", "error")
             return render_template("register.html", form_data=form_data)
 
         if len(password) < 6:
@@ -381,6 +368,8 @@ def profil():
 
     if request.method == "POST":
         nama = request.form.get("nama", "").strip()
+        headline = request.form.get("headline", "").strip()
+        skill = request.form.get("skill", "").strip()
         email = request.form.get("email", "").strip()
         telepon = request.form.get("telepon", "").strip()
         kota = request.form.get("kota", "").strip()
@@ -399,6 +388,7 @@ def profil():
                 linkedin=linkedin,
                 ringkasan=ringkasan
             )
+            jaringan.perbarui_headline_skill(user_id, headline=headline, skill=skill)
             db.cadangkan()
             session["nama"] = nama
             flash("Profil pribadi berhasil diperbarui.", "success")
@@ -551,13 +541,9 @@ def sunting_pencapaian_page(id):
         finally:
             con.close()
 
-        # Ubah status sesuai konfigurasi AUTO_APPROVE
-        if AUTO_APPROVE:
-            db.ubah_status_pencapaian(id, "disetujui")
-            flash("Pencapaian berhasil disimpan dan langsung disetujui untuk masuk ke CV!", "success")
-        else:
-            db.ubah_status_pencapaian(id, "menunggu")
-            flash("Pencapaian berhasil disimpan dan menunggu verifikasi verifikator kampus.", "success")
+        # Di CVku Network, semua pencapaian langsung aktif dan tampil di profil & CV
+        db.ubah_status_pencapaian(id, "disetujui")
+        flash("Pencapaian berhasil disimpan dan langsung tampil di profil publik serta CV!", "success")
 
         db.cadangkan()
         return redirect(url_for("daftar_pencapaian_page"))
@@ -623,7 +609,7 @@ def hapus_pencapaian_action(id):
 def cv_preview_page():
     user_id = session["user_id"]
     profil = db.baca_pengguna(user_id) or {}
-    cv = db.baca_cv_pengguna(user_id, hanya_disetujui=True)
+    cv = db.baca_cv_pengguna(user_id, hanya_disetujui=False)
 
     cv_ada = any(len(items) > 0 for items in cv.values())
     return render_template(
@@ -640,7 +626,7 @@ def cv_preview_page():
 def unduh_cv_action():
     user_id = session["user_id"]
     profil = db.baca_pengguna(user_id) or {}
-    cv = db.baca_cv_pengguna(user_id, hanya_disetujui=True)
+    cv = db.baca_cv_pengguna(user_id, hanya_disetujui=False)
 
     # Buat nama berkas timestamp unik
     nama_mentah = profil.get("nama") or session.get("username") or "Mahasiswa"
@@ -759,6 +745,113 @@ def verifikasi_action(id):
     status_teks = "disetujui untuk masuk ke CV" if status == "disetujui" else "ditolak"
     flash(f"Pencapaian berhasil diverifikasi dan {status_teks}.", "success")
     return redirect(url_for("verifikator_page"))
+
+
+# -----------------------------------------------------------------------------
+# Rute 10: CVku Network (Jelajah, Profil Publik, Koneksi, & Feed)
+# -----------------------------------------------------------------------------
+@app.route("/jelajah")
+def jelajah_page():
+    q = request.args.get("q", "").strip()
+    user_id = session.get("user_id")
+    daftar_mahasiswa = jaringan.cari_mahasiswa(q, id_saat_ini=user_id)
+    return render_template("jelajah.html", daftar_mahasiswa=daftar_mahasiswa, q=q)
+
+
+@app.route("/u/<int:id>")
+def profil_publik_page(id):
+    mhs = db.baca_pengguna(id)
+    if not mhs:
+        flash("Profil mahasiswa tidak ditemukan.", "error")
+        return redirect(url_for("jelajah_page"))
+
+    cv_data = db.baca_cv_pengguna(id, hanya_disetujui=False)
+    skills = jaringan._parse_skill(mhs.get("skill"))
+    user_id = session.get("user_id")
+    relasi = jaringan.status_koneksi(user_id, id) if user_id else "tidak_terhubung"
+    adalah_pemilik = (user_id == id)
+
+    return render_template(
+        "profil_publik.html",
+        mhs=mhs,
+        cv=cv_data,
+        skills=skills,
+        status_koneksi=relasi,
+        adalah_pemilik=adalah_pemilik,
+        urutan_bagian=skema.BAGIAN
+    )
+
+
+@app.route("/jaringan")
+@login_required
+def jaringan_page():
+    user_id = session["user_id"]
+    tab = request.args.get("tab", "koneksi")
+    daftar = jaringan.daftar_koneksi(user_id)
+    permintaan = jaringan.permintaan_masuk(user_id)
+    return render_template(
+        "jaringan.html",
+        tab=tab,
+        daftar_koneksi=daftar,
+        permintaan_masuk=permintaan
+    )
+
+
+@app.route("/koneksi/kirim/<int:id>", methods=["POST"])
+@login_required
+def kirim_koneksi_action(id):
+    user_id = session["user_id"]
+    sukses, pesan = jaringan.kirim_koneksi(user_id, id)
+    if sukses:
+        flash(pesan, "success")
+    else:
+        flash(pesan, "warning")
+    return redirect(request.referrer or url_for("profil_publik_page", id=id))
+
+
+@app.route("/koneksi/<int:id>/balas", methods=["POST"])
+@login_required
+def balas_koneksi_action(id):
+    user_id = session["user_id"]
+    status = request.form.get("status", "").strip()
+    sukses, pesan = jaringan.balas_koneksi(id, status, id_penerima=user_id)
+    if sukses:
+        flash(pesan, "success" if status == "terhubung" else "info")
+    else:
+        flash(pesan, "error")
+    return redirect(url_for("jaringan_page", tab="permintaan"))
+
+
+@app.route("/feed")
+@login_required
+def feed_page():
+    user_id = session["user_id"]
+    daftar_posting = jaringan.feed(user_id)
+    profil = db.baca_pengguna(user_id) or {}
+    return render_template("feed.html", postingan=daftar_posting, profil=profil)
+
+
+@app.route("/posting/buat", methods=["POST"])
+@login_required
+def buat_posting_action():
+    user_id = session["user_id"]
+    isi = request.form.get("isi", "").strip()
+    sukses, pesan = jaringan.buat_posting(user_id, isi)
+    if sukses:
+        flash(pesan, "success")
+    else:
+        flash(pesan, "error")
+    return redirect(url_for("feed_page"))
+
+
+@app.route("/posting/<int:id>/suka", methods=["POST"])
+@login_required
+def suka_posting_action(id):
+    user_id = session["user_id"]
+    disukai, total = jaringan.toggle_suka(id, user_id)
+    if request.headers.get("X-Requested-With") == "XMLHttpRequest" or request.is_json:
+        return {"disukai": disukai, "total": total}
+    return redirect(request.referrer or url_for("feed_page"))
 
 
 # -----------------------------------------------------------------------------
