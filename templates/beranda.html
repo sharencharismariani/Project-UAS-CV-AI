@@ -4,80 +4,240 @@
 
 {% block content %}
 {% if not session.get('user_id') %}
-  <!-- Tampilan untuk Pengunjung (Belum Login) -->
-  <div class="card" style="text-align: center; padding: 3rem 1.5rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);">
-    <span class="badge badge-section" style="margin-bottom: 1rem; font-size: 0.85rem;">CVku Network — Platform Jejaring Mahasiswa</span>
-    <h1 style="font-size: 2.3rem; font-weight: 800; color: var(--dark); line-height: 1.25; margin-bottom: 1rem;">
-      Bangun Jaringan, dan <span style="color: var(--primary);">CV-mu Tersusun Otomatis</span>
-    </h1>
-    <p style="font-size: 1.05rem; color: var(--muted); max-width: 680px; margin: 0 auto 2rem;">
-      Temukan dan terhubung dengan sesama mahasiswa, bagikan kabar proyek di feed, dan biarkan AI menyusun uraian kegiatan menjadi poin CV baku berstandar ATS.
-    </p>
+  <!-- ===================================================================
+       HERO SECTION ELEVATECV (Referensi Gambar 2)
+       Palet Warna: Royal Blue (#112250), Sapphire (#3C507D), Quicksand (#E0C58F),
+                    Swan Wing (#F5F0E9), Shellstone (#D9CBC2)
+       =================================================================== -->
+  <div class="elevate-hero-wrapper">
+    <div class="elevate-hero-grid">
+      <!-- Kolom Kiri: Headline & Call To Action -->
+      <div class="elevate-hero-content">
+        <span class="landing-tag-pill">✨ Platform AI Penyusun CV &amp; Jejaring Mahasiswa</span>
+        <h1 class="elevate-headline">
+          Expose Your Resume.<br>
+          <span style="color: var(--sapphire);">Expand Your Opportunities.</span>
+        </h1>
+        <p class="elevate-subheadline">
+          Unlock your career potential with our AI-powered platform that tailors your experience into ATS-ready achievements perfectly and connects you with fellow ambitious students.
+        </p>
 
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem;">
-      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Masuk ke Akun</a>
-      <a href="{{ url_for('register') }}" class="btn btn-outline btn-lg">Daftar Akun Baru</a>
-      <a href="{{ url_for('jelajah_page') }}" class="btn btn-outline btn-lg">🔍 Jelajah Mahasiswa</a>
-    </div>
-
-    <!-- Informasi Akun Uji Coba Demo -->
-    <div style="max-width: 520px; margin: 0 auto; text-align: left;" class="demo-account-box">
-      <strong>Akun Demo Siap Pakai:</strong>
-      <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.4rem;">
-        <div>
-          <span style="font-weight: 600;">Mahasiswa Demo:</span> <code>demo</code> / <code>demo123</code>
+        <div class="elevate-cta-group">
+          <a href="{{ url_for('register') }}" class="btn-get-hired">
+            Get Hired Faster ➔
+          </a>
+          <a href="#cara-kerja" class="btn-how-it-works">
+            How It Works ↗
+          </a>
         </div>
-        <div>
-          <span style="font-weight: 600;">Product Manager:</span> <code>budi_pm</code> / <code>demo123</code>
+
+        <div style="display: flex; align-items: center; gap: 1.5rem; color: var(--muted); font-size: 0.875rem; flex-wrap: wrap;">
+          <span style="display: flex; align-items: center; gap: 0.4rem;">
+            <strong style="color: var(--royal-blue); font-size: 1rem;">✓</strong> Format ATS DOCX 1 Kolom
+          </span>
+          <span style="display: flex; align-items: center; gap: 0.4rem;">
+            <strong style="color: var(--royal-blue); font-size: 1rem;">✓</strong> AI Action-Verb Generator
+          </span>
+          <span style="display: flex; align-items: center; gap: 0.4rem;">
+            <strong style="color: var(--royal-blue); font-size: 1rem;">✓</strong> 100% Gratis untuk Pengguna
+          </span>
+        </div>
+      </div>
+
+      <!-- Kolom Kanan: Scene Tangga Arsitektural Menuju Karier Impian (Gambar 2) -->
+      <div class="staircase-scene">
+        <div class="staircase-structure">
+          <!-- Undakan 1: Mahasiswa Awal -->
+          <div class="stair-step step-1">
+            <div class="step-figure">
+              <div class="figure-avatar white-shirt" title="Tahap 1: Eksplorasi Pengalaman">
+                🎓
+              </div>
+              <span class="figure-role-label">Mahasiswa</span>
+            </div>
+          </div>
+
+          <!-- Undakan 2: Active Intern -->
+          <div class="stair-step step-2">
+            <div class="step-figure">
+              <div class="figure-avatar blue-suit" title="Tahap 2: Magang & Proyek">
+                👨‍💻
+              </div>
+              <span class="figure-role-label">Active Intern</span>
+            </div>
+          </div>
+
+          <!-- Undakan 3: Leader / Innovator (Blazer Kuning seperti Gambar 2) -->
+          <div class="stair-step step-3">
+            <div class="step-figure">
+              <div class="figure-avatar yellow-blazer" title="Tahap 3: Pemimpin Tim & Prestasi">
+                👩‍💼
+              </div>
+              <span class="figure-role-label">Team Lead</span>
+            </div>
+          </div>
+
+          <!-- Undakan 4: Ready Professional (Aksen Quicksand) -->
+          <div class="stair-step step-4">
+            <div class="step-figure">
+              <div class="figure-avatar quicksand-accent" title="Tahap 4: CV ATS Baku & Jejaring Luas">
+                👨‍💼
+              </div>
+              <span class="figure-role-label">ATS Ready</span>
+            </div>
+          </div>
+
+          <!-- Undakan 5: Puncak Karier -->
+          <div class="stair-step step-5">
+            <div class="step-figure">
+              <div class="figure-avatar blue-suit" title="Tahap 5: Career Success">
+                🚀
+              </div>
+              <span class="figure-role-label">Hired!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Card Kiri Bawah: Video AI Demo Preview (Persis Gambar 2) -->
+        <div class="floating-preview-card">
+          <div class="floating-preview-thumb">
+            👩‍🎓
+            <div class="preview-play-icon">▶</div>
+          </div>
+          <div class="floating-preview-text">
+            Discover how our AI-powered resume optimizer helps you land your dream job faster.
+          </div>
+        </div>
+
+        <!-- Floating Card Kanan Bawah: 10K+ Job Seekers (Persis Gambar 2) -->
+        <div class="floating-stat-card">
+          <div class="stat-number-big">10K+</div>
+          <div class="stat-number-label">Job Seekers Empowered</div>
+          <div class="stat-number-desc">
+            Join over 10.000 professionals &amp; students who have optimized their resumes with our AI platform.
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Fitur Utama -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-    <div class="card">
-      <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🤖</div>
-      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">Penyusun CV Berbasis AI</h3>
-      <p style="color: var(--muted); font-size: 0.9rem;">
-        Uraian kegiatan diubah menjadi kalimat aktif berbobot yang menonjolkan aksi dan hasil faktual tanpa rekayasa.
+  <!-- SECTION: HOW IT WORKS (Cara Kerja) -->
+  <div id="cara-kerja" class="landing-section">
+    <div class="landing-section-header">
+      <span class="landing-tag-pill">Alur Cepat &amp; Sederhana</span>
+      <h2 class="landing-section-title">Bagaimana CVku Bekerja Untuk Anda</h2>
+      <p class="landing-section-desc">
+        Hanya butuh 3 langkah singkat untuk mengubah cerita kegiatan kuliah Anda menjadi dokumen CV baku siap lamar.
       </p>
     </div>
 
-    <div class="card">
-      <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🌐</div>
-      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">Jejaring Profesional</h3>
-      <p style="color: var(--muted); font-size: 0.9rem;">
-        Temukan rekan mahasiswa berdasarkan minat, keahlian, atau peranan. Kirim permintaan koneksi dan bangun relasi sejak kuliah.
+    <div class="how-it-works-grid">
+      <div class="how-card">
+        <div class="how-step-num">01</div>
+        <h3 class="how-card-title">Tulis Pengalaman Anda</h3>
+        <p class="how-card-text">
+          Tuliskan uraian kegiatan apa adanya — mulai dari kepanitiaan organisasi, magang, proyek kelas, hingga perlombaan tanpa perlu pusing memikirkan kalimat formal.
+        </p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-step-num">02</div>
+        <h3 class="how-card-title">AI Optimasi Poin Baku ATS</h3>
+        <p class="how-card-text">
+          Engine AI cerdas menganalisis uraian dan menyusun kalimat aktif, berorientasi hasil kuantitatif, dan bebas kata klise sesuai kaidah ATS internasional.
+        </p>
+      </div>
+
+      <div class="how-card">
+        <div class="how-step-num">03</div>
+        <h3 class="how-card-title">Ekspansi Jaringan &amp; Unduh DOCX</h3>
+        <p class="how-card-text">
+          Profil publik Anda otomatis terisi, terhubung dengan rekan mahasiswa berbakat, dan unduh berkas DOCX satu kolom ATS kapan saja tanpa batasan.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: FEATURES (Fitur Unggulan) -->
+  <div id="fitur" class="landing-section">
+    <div class="landing-section-header">
+      <span class="landing-tag-pill">Fitur Pembeda</span>
+      <h2 class="landing-section-title">Didesain Khusus untuk Standar Industri</h2>
+      <p class="landing-section-desc">
+        Semua fitur dibangun agar Anda lebih mudah dilihat oleh rekruter dan terhubung di ekosistem profesional.
       </p>
     </div>
 
-    <div class="card">
-      <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📄</div>
-      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--dark);">Format DOCX ATS-Friendly</h3>
-      <p style="color: var(--muted); font-size: 0.9rem;">
-        Satu kolom, tanpa tabel, tanpa gambar, struktur heading rapi yang dapat terbaca optimal oleh sistem ATS rekruter perusahaan.
+    <div class="features-grid">
+      <div class="feature-box">
+        <div class="feature-icon-circle">📄</div>
+        <h4 class="feature-title">Dokumen ATS-Friendly</h4>
+        <p class="feature-desc">
+          Ekspor format DOCX satu kolom murni tanpa tabel dan tanpa gambar rumit agar 100% terbaca sempurna oleh mesin ATS rekruter.
+        </p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon-circle">🤖</div>
+        <h4 class="feature-title">AI Action Verb Builder</h4>
+        <p class="feature-desc">
+          Setiap butir kegiatan otomatis disusun dengan kata kerja tindakan aktif dan struktur metrik hasil yang meyakinkan.
+        </p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon-circle">🔍</div>
+        <h4 class="feature-title">Jelajah Rekan &amp; Portofolio</h4>
+        <p class="feature-desc">
+          Cari sesama rekan mahasiswa berdasarkan keahlian khusus, portofolio proyek, dan kota dengan hasil pencarian instan.
+        </p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon-circle">🌐</div>
+        <h4 class="feature-title">Feed Sosial &amp; Koneksi</h4>
+        <p class="feature-desc">
+          Bagikan perkembangan karya terbaru di feed jejaring, kirim permintaan koneksi, dan saling berikan apresiasi.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: CTA BANNER MEWAH -->
+  <div class="landing-section">
+    <div class="landing-cta-banner">
+      <h2 class="cta-banner-title">Siap Memperluas Peluang Karier Anda?</h2>
+      <p class="cta-banner-desc">
+        Bergabunglah bersama ribuan mahasiswa lainnya. Bangun profil profesional, perluas koneksi, dan biarkan CV Anda tersusun otomatis.
       </p>
+      <div class="cta-btn-group">
+        <a href="{{ url_for('register') }}" class="btn btn-quicksand btn-lg">
+          Daftar Akun Gratis Sekarang ➔
+        </a>
+        <a href="{{ url_for('jelajah_page') }}" class="btn btn-outline btn-lg" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.35);">
+          🔍 Jelajah Rekan Mahasiswa
+        </a>
+      </div>
     </div>
   </div>
 
 {% else %}
-  <!-- Dashboard Mahasiswa -->
-  <div class="card" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #ffffff; padding: 2rem;">
+  <!-- Dashboard Pengguna Terdaftar -->
+  <div class="card" style="background: linear-gradient(135deg, var(--royal-blue) 0%, var(--sapphire) 100%); color: #ffffff; padding: 2.25rem; border: 1px solid var(--sapphire); box-shadow: var(--shadow-lg);">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
       <div>
-        <span class="badge badge-section" style="background: rgba(37,99,235,0.25); color: #93c5fd; border-color: rgba(147,197,253,0.3); margin-bottom: 0.5rem;">
-          Mode AI Aktif: {{ ai_mode|upper }}
+        <span class="badge" style="background: rgba(224, 197, 143, 0.2); color: var(--quicksand); border: 1px solid var(--quicksand); margin-bottom: 0.5rem; font-weight: 700;">
+          Mode AI: {{ ai_mode|upper }}
         </span>
         <h1 style="font-size: 1.85rem; font-weight: 800; color: #ffffff;">Halo, {{ profil.nama or session.get('username') }}! 👋</h1>
-        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.25rem;">
-          {{ profil.headline or 'Bangun profil dan perluas jaringan profesional Anda bersama mahasiswa lainnya.' }}
+        <p style="color: #cbd5e1; font-size: 0.95rem; margin-top: 0.25rem;">
+          {{ profil.headline or 'Bangun profil dan perluas jaringan profesional Anda bersama rekan lainnya.' }}
         </p>
       </div>
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <a href="{{ url_for('feed_page') }}" class="btn btn-outline" style="color: #ffffff; border-color: rgba(255,255,255,0.3);">📢 Buka Feed</a>
-        <a href="{{ url_for('jelajah_page') }}" class="btn btn-outline" style="color: #ffffff; border-color: rgba(255,255,255,0.3);">🔍 Jelajah Rekan</a>
-        <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-primary">+ Tambah Kegiatan</a>
+        <a href="{{ url_for('feed_page') }}" class="btn btn-outline" style="color: #ffffff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1);">📢 Buka Feed</a>
+        <a href="{{ url_for('jelajah_page') }}" class="btn btn-outline" style="color: #ffffff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1);">🔍 Jelajah Rekan</a>
+        <a href="{{ url_for('tambah_pencapaian_page') }}" class="btn btn-quicksand">+ Tambah Kegiatan</a>
         <a href="{{ url_for('cv_preview_page') }}" class="btn btn-secondary">📄 Pratinjau &amp; Unduh CV</a>
       </div>
     </div>
@@ -93,19 +253,19 @@
 
     <div class="stat-card">
       <span class="stat-label">Koneksi Terhubung</span>
-      <span class="stat-value" style="color: var(--primary);">{{ stats.koneksi }}</span>
-      <span class="stat-desc">Rekan mahasiswa di jaringan</span>
+      <span class="stat-value" style="color: var(--royal-blue);">{{ stats.koneksi }}</span>
+      <span class="stat-desc">Rekan di jaringan Anda</span>
     </div>
 
     <div class="stat-card">
       <span class="stat-label">Permintaan Masuk</span>
-      <span class="stat-value" style="color: #d97706;">{{ stats.permintaan }}</span>
+      <span class="stat-value" style="color: #b45309;">{{ stats.permintaan }}</span>
       <span class="stat-desc">Menunggu konfirmasi Anda</span>
     </div>
 
     <div class="stat-card">
       <span class="stat-label">Versi CV Diunduh</span>
-      <span class="stat-value" style="color: var(--secondary);">{{ stats.versi_cv }}</span>
+      <span class="stat-value" style="color: var(--sapphire);">{{ stats.versi_cv }}</span>
       <span class="stat-desc">Tersimpan di riwayat</span>
     </div>
   </div>

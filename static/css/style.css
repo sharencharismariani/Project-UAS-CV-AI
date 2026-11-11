@@ -4,45 +4,69 @@
    =================================================================== */
 
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #eff6ff;
-  --secondary: #0d9488;
-  --secondary-hover: #0f766e;
-  --dark: #0f172a;
-  --slate: #334155;
-  --muted: #64748b;
-  --light: #f8fafc;
+  /* ===================================================================
+     Palet Warna Mewah CVku Network
+     - SAPPHIRE:   #3C507D (RGB 48, 80, 112)
+     - ROYAL BLUE: #112250 (RGB 17, 34, 80)
+     - QUICKSAND:  #E0C58F (RGB 224, 181, 143)
+     - SWAN WING:  #F5F0E9 (RGB 245, 240, 233)
+     - SHELLSTONE: #D9CBC2 (RGB 217, 203, 194)
+     =================================================================== */
+  --royal-blue: #112250;
+  --royal-blue-hover: #0a1533;
+  --sapphire: #3C507D;
+  --sapphire-hover: #2b3a5c;
+  --sapphire-light: #edf2f9;
+  --quicksand: #E0C58F;
+  --quicksand-hover: #d1b47b;
+  --quicksand-light: #faf5ed;
+  --swan-wing: #F5F0E9;
+  --shellstone: #D9CBC2;
+  --shellstone-light: #ebe2db;
+
+  /* Semantik Standar Aplikasi */
+  --primary: #112250;
+  --primary-hover: #0a1533;
+  --primary-light: #edf2f9;
+  --secondary: #3C507D;
+  --secondary-hover: #2b3a5c;
+  --accent: #E0C58F;
+  --accent-hover: #d1b47b;
+
+  --dark: #112250;
+  --slate: #2b374e;
+  --muted: #5e6d87;
+  --light: #F5F0E9;
   --white: #ffffff;
-  --border: #e2e8f0;
-  --border-focus: #93c5fd;
+  --border: #D9CBC2;
+  --border-focus: #3C507D;
   
-  --success-bg: #dcfce7;
-  --success-text: #166534;
-  --success-border: #86efac;
+  --success-bg: #e6f4ea;
+  --success-text: #137333;
+  --success-border: #a8dab5;
   
-  --warning-bg: #fef3c7;
-  --warning-text: #92400e;
-  --warning-border: #fde68a;
+  --warning-bg: #faf5ed;
+  --warning-text: #966914;
+  --warning-border: #E0C58F;
   
   --danger-bg: #fee2e2;
   --danger-text: #991b1b;
   --danger-border: #fca5a5;
   
-  --info-bg: #e0f2fe;
-  --info-text: #075985;
-  --info-border: #bae6fd;
+  --info-bg: #edf2f9;
+  --info-text: #112250;
+  --info-border: #D9CBC2;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(17, 34, 80, 0.06);
+  --shadow: 0 4px 12px rgba(17, 34, 80, 0.08), 0 2px 4px rgba(17, 34, 80, 0.04);
+  --shadow-lg: 0 14px 28px rgba(17, 34, 80, 0.12), 0 6px 12px rgba(17, 34, 80, 0.06);
 
-  --radius-sm: 6px;
-  --radius: 10px;
-  --radius-lg: 14px;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
   --radius-full: 9999px;
 
-  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-main: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-cv: "Calibri", "Arial", sans-serif;
 }
 
@@ -54,7 +78,7 @@
 
 body {
   font-family: var(--font-main);
-  background-color: #f1f5f9;
+  background-color: var(--swan-wing);
   color: var(--slate);
   line-height: 1.6;
   min-height: 100vh;
@@ -63,13 +87,13 @@ body {
 }
 
 a {
-  color: var(--primary);
+  color: var(--sapphire);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 a:hover {
-  color: var(--primary-hover);
+  color: var(--royal-blue);
 }
 
 /* ================= Navbar ================= */
@@ -103,8 +127,9 @@ a:hover {
 }
 
 .brand-badge {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: var(--white);
+  background: linear-gradient(135deg, var(--royal-blue), var(--sapphire));
+  color: var(--quicksand);
+  border: 1px solid var(--quicksand);
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
@@ -263,57 +288,78 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  padding: 0.55rem 1.15rem;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
   font-size: 0.925rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
   line-height: 1.4;
 }
 
-.btn-primary {
-  background-color: var(--primary);
+.btn-primary, .btn-royal {
+  background-color: var(--royal-blue);
   color: var(--white);
+  border-color: var(--royal-blue);
+  box-shadow: 0 4px 10px rgba(17, 34, 80, 0.15);
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-hover);
+.btn-primary:hover, .btn-royal:hover {
+  background-color: var(--royal-blue-hover);
   color: var(--white);
+  border-color: var(--royal-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(17, 34, 80, 0.25);
 }
 
-.btn-secondary {
-  background-color: var(--secondary);
+.btn-secondary, .btn-sapphire {
+  background-color: var(--sapphire);
   color: var(--white);
+  border-color: var(--sapphire);
 }
 
-.btn-secondary:hover {
-  background-color: var(--secondary-hover);
+.btn-secondary:hover, .btn-sapphire:hover {
+  background-color: var(--sapphire-hover);
   color: var(--white);
+  border-color: var(--sapphire-hover);
+  transform: translateY(-1px);
+}
+
+.btn-quicksand, .btn-accent {
+  background-color: var(--quicksand);
+  color: var(--royal-blue);
+  border-color: #d2b376;
+  font-weight: 700;
+}
+
+.btn-quicksand:hover, .btn-accent:hover {
+  background-color: var(--quicksand-hover);
+  color: var(--royal-blue);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
   background-color: var(--white);
-  color: var(--slate);
-  border-color: var(--border);
+  color: var(--dark);
+  border-color: var(--shellstone);
 }
 
 .btn-outline:hover {
-  background-color: var(--light);
-  color: var(--dark);
-  border-color: #cbd5e1;
+  background-color: var(--swan-wing);
+  color: var(--royal-blue);
+  border-color: var(--sapphire);
 }
 
 .btn-danger {
-  background-color: #ef4444;
+  background-color: #dc2626;
   color: var(--white);
 }
 
 .btn-danger:hover {
-  background-color: #dc2626;
+  background-color: #b91c1c;
 }
 
 .btn-danger-outline {
@@ -327,13 +373,15 @@ a:hover {
 }
 
 .btn-sm {
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.8rem;
   font-size: 0.825rem;
 }
 
 .btn-lg {
-  padding: 0.75rem 1.6rem;
+  padding: 0.85rem 1.85rem;
   font-size: 1.05rem;
+  border-radius: 10px;
+}
 }
 
 /* ================= Form Controls ================= */
@@ -420,9 +468,9 @@ textarea.form-control {
 }
 
 .badge-section {
-  background-color: var(--primary-light);
-  color: var(--primary);
-  border-color: #bfdbfe;
+  background-color: var(--sapphire-light);
+  color: var(--royal-blue);
+  border-color: var(--shellstone);
 }
 
 /* ================= Tables ================= */
@@ -686,12 +734,12 @@ textarea.form-control {
 
 /* ================= Footer ================= */
 .footer {
-  background-color: var(--white);
-  border-top: 1px solid var(--border);
-  padding: 1.25rem;
+  background-color: var(--royal-blue);
+  border-top: 1px solid var(--sapphire);
+  padding: 1.5rem 1.25rem;
   text-align: center;
-  font-size: 0.825rem;
-  color: var(--muted);
+  font-size: 0.85rem;
+  color: var(--swan-wing);
   margin-top: auto;
 }
 
@@ -893,4 +941,543 @@ textarea.form-control {
   border-color: #fecdd3;
   background-color: #fff1f2;
   font-weight: 600;
+}
+
+/* ===================================================================
+   ElevateCV / CVku - Gaya Khusus Landing Page (Referensi Gambar 2)
+   Palet: Royal Blue (#112250), Sapphire (#3C507D), Quicksand (#E0C58F),
+          Swan Wing (#F5F0E9), Shellstone (#D9CBC2)
+   =================================================================== */
+
+.elevate-hero-wrapper {
+  background: linear-gradient(180deg, rgba(245, 240, 233, 0.95) 0%, #ffffff 100%);
+  border: 1px solid var(--shellstone);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 3rem 2.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(17, 34, 80, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.elevate-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.elevate-headline {
+  font-size: 3.15rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--royal-blue);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.elevate-subheadline {
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: #4a5568;
+  max-width: 520px;
+  margin-bottom: 2.25rem;
+}
+
+.elevate-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.btn-get-hired {
+  background-color: var(--royal-blue);
+  color: #ffffff;
+  padding: 0.95rem 2.2rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 2px solid var(--royal-blue);
+  box-shadow: 0 6px 18px rgba(17, 34, 80, 0.22);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-get-hired:hover {
+  background-color: var(--royal-blue-hover);
+  color: var(--quicksand);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(17, 34, 80, 0.32);
+}
+
+.btn-how-it-works {
+  background-color: transparent;
+  color: var(--royal-blue);
+  padding: 0.95rem 1.8rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: 1.5px solid var(--shellstone);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-how-it-works:hover {
+  background-color: var(--swan-wing);
+  border-color: var(--sapphire);
+  color: var(--sapphire);
+  transform: translateY(-2px);
+}
+
+/* ================= Tangga Berundak Arsitektural (Gambar 2) ================= */
+.staircase-scene {
+  position: relative;
+  width: 100%;
+  min-height: 440px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.staircase-structure {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* Undakan Tangga Putih Berlapis */
+.stair-step {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid var(--shellstone);
+  border-bottom: none;
+  box-shadow: -4px -6px 16px rgba(17, 34, 80, 0.04), 0 10px 20px rgba(17, 34, 80, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.stair-step:hover {
+  transform: translateY(-4px);
+}
+
+.step-1 {
+  width: 80px;
+  height: 80px;
+  left: 5%;
+  bottom: 0;
+  z-index: 5;
+  border-top-left-radius: 10px;
+}
+
+.step-2 {
+  width: 80px;
+  height: 145px;
+  left: calc(5% + 75px);
+  bottom: 0;
+  z-index: 4;
+  border-top-left-radius: 10px;
+}
+
+.step-3 {
+  width: 85px;
+  height: 215px;
+  left: calc(5% + 150px);
+  bottom: 0;
+  z-index: 3;
+  border-top-left-radius: 10px;
+}
+
+.step-4 {
+  width: 85px;
+  height: 285px;
+  left: calc(5% + 230px);
+  bottom: 0;
+  z-index: 2;
+  border-top-left-radius: 10px;
+}
+
+.step-5 {
+  width: 90px;
+  height: 360px;
+  left: calc(5% + 310px);
+  bottom: 0;
+  z-index: 1;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Figur / Karakter pada Tiap Anak Tangga */
+.step-figure {
+  position: absolute;
+  top: -68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: floatFigure 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatFigure {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.figure-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(17, 34, 80, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: var(--swan-wing);
+  position: relative;
+}
+
+.figure-avatar.yellow-blazer {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  border-color: #fef08a;
+  box-shadow: 0 6px 14px rgba(245, 158, 11, 0.35);
+}
+
+.figure-avatar.white-shirt {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+.figure-avatar.blue-suit {
+  background: linear-gradient(135deg, var(--sapphire), var(--royal-blue));
+  color: #ffffff;
+}
+
+.figure-avatar.quicksand-accent {
+  background: linear-gradient(135deg, var(--quicksand), #caa869);
+  color: var(--royal-blue);
+}
+
+.figure-role-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--royal-blue);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--shellstone);
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+}
+
+/* ================= Floating Mini Cards (Kiri & Kanan Bawah) ================= */
+.floating-preview-card {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--shellstone);
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  max-width: 250px;
+  box-shadow: 0 8px 24px rgba(17, 34, 80, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.floating-preview-thumb {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--sapphire-light), var(--swan-wing));
+  border: 1px solid var(--shellstone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.preview-play-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--royal-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  bottom: -3px;
+  right: -3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.floating-preview-text {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--slate);
+  font-weight: 500;
+}
+
+.floating-stat-card {
+  position: absolute;
+  bottom: 12px;
+  right: 0;
+  z-index: 10;
+  background: rgba(238, 242, 248, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--shellstone);
+  border-radius: 14px;
+  padding: 0.85rem 1.15rem;
+  max-width: 260px;
+  box-shadow: 0 8px 24px rgba(17, 34, 80, 0.08);
+}
+
+.stat-number-big {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--royal-blue);
+  line-height: 1;
+}
+
+.stat-number-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--sapphire);
+  margin-top: 0.15rem;
+}
+
+.stat-number-desc {
+  font-size: 0.72rem;
+  line-height: 1.3;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+/* ================= Section Headers & Grids ================= */
+.landing-section {
+  margin-bottom: 3.5rem;
+}
+
+.landing-section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2.25rem;
+}
+
+.landing-tag-pill {
+  display: inline-block;
+  background-color: var(--quicksand-light);
+  color: #8c6314;
+  border: 1px solid var(--quicksand);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 0.25rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.65rem;
+}
+
+.landing-section-title {
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: var(--royal-blue);
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.landing-section-desc {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* How It Works Cards */
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.how-card {
+  background: #ffffff;
+  border: 1px solid var(--shellstone);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+  box-shadow: 0 4px 14px rgba(17, 34, 80, 0.04);
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.how-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sapphire);
+}
+
+.how-step-num {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--royal-blue);
+  color: var(--quicksand);
+  font-weight: 800;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 10px rgba(17, 34, 80, 0.2);
+}
+
+.how-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--royal-blue);
+  margin-bottom: 0.5rem;
+}
+
+.how-card-text {
+  font-size: 0.925rem;
+  color: var(--slate);
+  line-height: 1.55;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.feature-box {
+  background: #ffffff;
+  border: 1px solid var(--shellstone);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(17, 34, 80, 0.04);
+  transition: all 0.2s ease;
+}
+
+.feature-box:hover {
+  border-color: var(--sapphire);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(17, 34, 80, 0.08);
+}
+
+.feature-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--swan-wing);
+  border: 1px solid var(--shellstone);
+  color: var(--royal-blue);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--royal-blue);
+  margin-bottom: 0.35rem;
+}
+
+.feature-desc {
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.5;
+}
+
+/* Call To Action Box (Bawah) */
+.landing-cta-banner {
+  background: linear-gradient(135deg, var(--royal-blue) 0%, #1c326d 100%);
+  border: 1px solid var(--sapphire);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2rem;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 16px 36px rgba(17, 34, 80, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-cta-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(224, 197, 143, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cta-banner-title {
+  font-size: 2.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.cta-banner-desc {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.cta-btn-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .elevate-hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .elevate-headline {
+    font-size: 2.6rem;
+  }
+  .elevate-subheadline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .elevate-cta-group {
+    justify-content: center;
+  }
+  .staircase-scene {
+    min-height: 380px;
+  }
+  .floating-preview-card, .floating-stat-card {
+    position: static;
+    margin: 1rem auto;
+  }
 }
