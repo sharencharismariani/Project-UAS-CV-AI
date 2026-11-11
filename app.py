@@ -82,6 +82,22 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "cvku-secret-key-2026-uts-ai-cv")
 
 
+# Pastikan setiap request selalu fresh dari server tanpa caching browser
+@app.after_request
+def add_no_cache_headers(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
+
+@app.context_processor
+def inject_waktu_server():
+    return {
+        "waktu_refresh": datetime.datetime.now().strftime("%H:%M:%S")
+    }
+
+
 # -----------------------------------------------------------------------------
 # Middleware & Decorators Hak Akses
 # -----------------------------------------------------------------------------
